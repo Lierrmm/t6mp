@@ -1,0 +1,151 @@
+/* Teleportation Functions */
+
+saveLoad(param)
+{
+	if(param == 1){self.savedOrigin = self.origin;self.saveOrigin = true;self dn("Saved ^5Location");self iprintln("Saved ^5Location");
+	}
+	if(param == 2){
+		if(isDefined(self.savedOrigin)){self setOrigin(self.savedOrigin);self dn("Loaded ^2Location");self iprintln("Loaded ^2Location");
+		}
+		else self dn("Location is not saved!");
+	}
+	if(param == 3){
+		if(isDefined(self.savedOrigin)){self.savedOrigin = undefined;self.saveOrigin = false;self dn("Saved location ^1Cleared");
+		}
+	}
+	if(param == 4){
+		if(!self.saveLoad)
+		{
+			self.saveLoad = true;
+			self thread snlBinds();
+			self dn("Save and Load Binds ^2Enabled");
+			self iprintln("^7Press ^5[{+melee}] ^7& ^5[{+frag}]^7 while ^3prone^7 to ^5Save\n^7Press ^5[{+melee}] ^7& ^5[{+smoke}]^7 while ^3Crouched^7 to ^5Load \n");
+		}
+		else 
+		{ 
+			self notify("stop_snl"); 
+			self dn("Save and Load Binds ^1Disabled");
+			self.saveLoad = false;
+		}
+	}
+}
+
+snlBinds()
+{
+	self endon("disconnect");
+	self endon("stop_snl");
+	for(;;)
+	{
+		if(self meleeButtonPressed() && self secondaryOffHandButtonPressed() && self getStance() == "crouch")
+		{
+			if(isDefined(self.savedOrigin)) self saveLoad(2);
+			else self iprintln("^1Error: ^7Location Not Available.");
+			wait .2;
+		}
+		if(self meleeButtonPressed() && self fragButtonPressed() && self getStance() == "prone")
+		{
+			self saveLoad(1);
+			wait .2;
+		}
+		wait .05;
+	}
+}
+
+
+gWeap(wep, menu)
+{
+	self _loadMenu(menu);
+	self waittill("attached");
+	self _loadMenu("camos");
+	self waittill("attachedc");
+	
+		self giveWeapon(wep+"_mp"+self.newAttach, self.newCamo);
+		self iprintln("^2" + wep + " Given!");
+		self SwitchToWeapon(wep+"_mp"+self.newAttach);
+
+}
+gAttach(atr)
+{
+	self.newAttach = "+" + atr;
+	self notify("attached");
+}
+gCamo(atr)
+{
+	self.newCamo = atr;
+	self notify("attachedc");
+}
+SpawnBounce(model)
+{
+	self iprintln("^5Shoot to spawn your bounce!");
+    self waittill("weapon_fired");
+    vec = anglestoforward(self getPlayerAngles());
+    origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
+    self.crate = spawn("script_model",origin);
+    self.crate setModel(model);
+    self.crate thread BouncePhysics();
+    self dn("Bounce has been spawned!");
+}
+
+BouncePhysics()
+{
+     while(1)
+    {
+        foreach(player in level.players)
+          {
+              if (player GetVelocity()[2] < 100 && distance(player.origin, self.origin) < 50) 
+              {
+                  player SetVelocity(player GetVelocity()[2]*(0,0,-400));
+                  self IPrintLn("hit!");
+              }
+          }
+        wait 0.01;
+    } 
+}
+
+spawnSlide()
+{   
+	self iprintln("^5Shoot to spawn your slide!");
+	self waittill("weapon_fired");
+	vec = anglestoforward(self getPlayerAngles());
+    origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
+	self thread Slide(origin, self getPlayerAngles());
+}
+Slide( slidePosition, slideAngles ) 
+{
+	level endon( "game_ended" );
+	level.slide[level.numberOfSlides] = spawn("script_model", slidePosition);
+	level.slide[level.numberOfSlides].angles = (0,slideAngles[1]-90,60);
+	level.slide[level.numberOfSlides] setModel("t6_wpn_supply_drop_trap");
+	level.numberOfSlides++;
+	for(;;)
+	{
+		foreach(player in level.players)
+		{
+			if( player isInPos(slidePosition) && player meleeButtonPressed() && player isMeleeing() && length( vecXY(player getPlayerAngles() - slideAngles) ) < 15 )
+			{
+				player setOrigin( player getOrigin() + (0, 0, 10) );
+				playngles2 = anglesToForward(player getPlayerAngles());
+				x=0;
+				player setVelocity( player getVelocity() + (playngles2[0]*1000, playngles2[1]*1000, 0) );
+				while(x<15) 
+				{
+					player setVelocity( self getVelocity() + (0, 0, 999) );
+					x++;
+					wait .01;
+				}
+				wait 1;
+			}
+		}
+	wait .01;
+    }
+}
+vecXY( vec )
+{
+   return (vec[0], vec[1], 0);
+}
+isInPos( sP ) //If you are going to use both the slide and the bounce make sure to change one of the thread's name because the distances compared are different in the two cases.
+{
+	if(distance( self.origin, sP ) < 100)
+		return true;
+	return false;
+}
