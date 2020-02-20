@@ -14,7 +14,7 @@ menuButtons()
     self endon("disconnect");
     for(;;)
     {
-        if(self ActionSlotTwoButtonPressed() && self MeleeButtonPressed() && self getStance() == "stand" && self.Menu.Opened==false)
+        if(self AdsButtonPressed() && self MeleeButtonPressed() && self getStance() == "stand" && self.Menu.Opened==false)
         {
             self.Menu.Opened = true;
             self freezeControls(true);
@@ -23,7 +23,7 @@ menuButtons()
             self aioscroll();
             wait .2;
         }
-        if(self ActionSlotOneButtonPressed() && self.Menu.Opened==true)
+        if(self AdsButtonPressed() && self.Menu.Opened==true)
         {
             self.Scroller --;
             self scrollAnim();
@@ -103,7 +103,7 @@ addGlowText(i)
     if(self.isGlowText)
     {
         self.Hud.Text[i].glowColor = self.menuColors;
-        self.Hud.Text[i].glowAlpha = 1;
+        self.Hud.Text[i].glowAlpha = .4;
     }
 }
 destroyMenuText()
@@ -150,8 +150,9 @@ destroyHud()
     self.Hud.Desc destroy();
 }
 
-mColor(name)
+mColor(name, value)
 {
+	setDvar(self getXUID() + "m_setting", value);
     self.menuColors = name;
     self.oldScroll  = self.Scroller;
     self destroyHud();
@@ -160,6 +161,7 @@ mColor(name)
     self createMenuText();
     self.Scroller = self.oldScroll;
     self.Hud.Title setText(self.Menu.title[self.Menu.CurrentMenu]);
+    self iprintln("Setting will stay as long as server is up!");
     self aioscroll();
 }
 

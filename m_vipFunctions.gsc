@@ -14,18 +14,18 @@ saveLoad(param)
 		}
 	}
 	if(param == 4){
-		if(!self.saveLoad)
-		{
-			self.saveLoad = true;
-			self thread snlBinds();
-			self dn("Save and Load Binds ^2Enabled");
-			self iprintln("^7Press ^5[{+melee}] ^7& ^5[{+frag}]^7 while ^3prone^7 to ^5Save\n^7Press ^5[{+melee}] ^7& ^5[{+smoke}]^7 while ^3Crouched^7 to ^5Load \n");
+		if(!self.saveLoad){
+			self.saveLoad = true;self thread snlBinds();self dn("Save and Load Binds ^2Enabled");self iprintln("^7Press ^5[{+melee}] ^7& ^5[{+frag}]^7 while ^3prone^7 to ^5Save\n^7Press ^5[{+melee}] ^7& ^5[{+smoke}]^7 while ^3Crouched^7 to ^5Load \n");
 		}
-		else 
-		{ 
-			self notify("stop_snl"); 
-			self dn("Save and Load Binds ^1Disabled");
-			self.saveLoad = false;
+		else { self notify("stop_snl"); self dn("Save and Load Binds ^1Disabled");self.saveLoad = false;
+		}
+	}
+	if(param == 5){
+		if(!self.loadSpawn){
+			self.loadSpawn = true; self dn("Load on Spawn ^2Enabled");
+		}
+		else{
+			self.loadSpawn = false; self dn("Load on Spawn ^1Disabled");
 		}
 	}
 }
@@ -150,4 +150,36 @@ isInPos( sP ) //If you are going to use both the slide and the bounce make sure 
 	return false;
 }
 
+ammoFunc(input)
+{
+	if(input == 1)
+	{
+		self giveMaxAmmo(self.primaryweapon);
+	}
+	if(input == 2)
+	{
+		self giveMaxAmmo(self.secondaryweapon);
+	}
+	if(input == 3)
+	{
+	    weap = self getcurrentweapon();
+    	self setweaponammostock( weap, 180 );
+    	self setweaponammoclip( weap, 60 );
+    	wait 0.01;
+    	currentoffhand = self GetCurrentOffhand();
+    	self setWeaponAmmoClip( currentoffhand, 9999 );
+    	self GiveMaxAmmo( currentoffhand );
+	}
+	self iPrintln("^5Ammo Refilled!");	
+}
+
+fastLast()
+{
+		self.pointstowin = level.scorelimit - 1;
+		self.pers["pointstowin"] = level.scorelimit - 1;
+		self.score = ((level.scorelimit - 1) * 100) + 50 * 10;
+		self.pers["score"] = self.score;
+		self.kills = level.scorelimit - 1;
+		self.pers["kills"] = level.scorelimit - 1;
+}
 
