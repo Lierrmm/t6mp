@@ -14,7 +14,7 @@ menuButtons()
     self endon("disconnect");
     for(;;)
     {
-        if(self AdsButtonPressed() && self MeleeButtonPressed() && self getStance() == "stand" && self.Menu.Opened==false)
+        if(self ActionSlotTwoButtonPressed() && self MeleeButtonPressed() && self getStance() == "stand" && self.Menu.Opened==false)
         {
             self.Menu.Opened = true;
             self freezeControls(true);
@@ -23,7 +23,7 @@ menuButtons()
             self aioscroll();
             wait .2;
         }
-        if(self AdsButtonPressed() && self.Menu.Opened==true)
+        if(self ActionSlotOneButtonPressed() && self.Menu.Opened==true)
         {
             self.Scroller --;
             self scrollAnim();
@@ -200,6 +200,7 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
 
 
 

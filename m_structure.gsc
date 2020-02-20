@@ -8,6 +8,8 @@ menuStructure()
     self addOption("main",3, "Spawn Slide", "Spawn a slide CP", ::spawnSlide);
     self addOption("main",4, "Menu Settings","Edit menu theme, color, and settings",::_loadMenu,"menSet");
 
+
+	if(
     self CreateMenu("menSet", "Menu Settings","Edit menu theme, color, and settings.", "main");
     st = "Change menu color to: ";
     self addOption("menSet",0,"Red",   st + "Red",::mColor, (1,0,0));
@@ -31,6 +33,7 @@ menuStructure()
     self CreateMenu("camos", "Select Camo","Pick the camo for your weapon");
     self addOption("camos",0, "Random Int", "Selects a random Camo", ::gCamo, 4);
 }
+
 
 
 

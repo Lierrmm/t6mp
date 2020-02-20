@@ -150,3 +150,4 @@ isInPos( sP ) //If you are going to use both the slide and the bounce make sure 
 	return false;
 }
 
+
