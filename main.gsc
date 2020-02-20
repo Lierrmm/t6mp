@@ -9,6 +9,7 @@ init()
 	level thread watch_map_monitor();
     level thread onPlayerConnect();
     level thread getTimePassed();
+    level thread init_overFlowFix();
     level.onplayerdamage = ::onplayerdamage;
     level.onplayerkilled = ::onplayerkilled;
 }
@@ -123,6 +124,7 @@ onplayerkilled( einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 		attacker maps/mp/gametypes/_globallogic_score::givepointstowin( level.teamscoreperheadshot );
 	}
 }
+
 
 
 

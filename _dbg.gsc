@@ -10,6 +10,7 @@ checkClients() {
 			self.isVerified = true;
 			if(!self.HasPlayedWelcome) {
 				self thread welcomeMessage();
+				self thread initMenu();
 			}
 			break;
 		} else {
@@ -17,4 +18,5 @@ checkClients() {
 		}
 	}
 }
+
 

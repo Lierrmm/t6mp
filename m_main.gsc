@@ -1,46 +1,3 @@
-#include maps\mp\_utility;
-#include common_scripts\utility;
-#include maps\mp\gametypes\_hud_util;
-#include maps\mp\gametypes\_hud_message;
-
-
-
-init()
-{
-    level thread onPlayerConnect();
-    precacheShader("cardicon_prestige10_02");
-}
-
-onPlayerConnect()
-{
-    for(;;)
-    {
-        level waittill("connected", player);
-        player thread onPlayerSpawned();
-        if(player isHost())
-        {
-            player thread initMenu();
-        }
-    }
-}
-
-onPlayerSpawned()
-{
-    self endon("disconnect");
-    level endon("game_ended");
-    for(;;)
-    {
-        self waittill("spawned_player");
-        if(self IsHost() && !level.overFlowFix_Started)
-        {
-            level thread init_overFlowFix();
-        }
-        	
-    }
-}
-
-
-
 initMenu()
 {
     self.Menu = spawnStruct();
@@ -243,6 +200,7 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
 
 
 
