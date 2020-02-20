@@ -183,3 +183,4 @@ fastLast()
 		self.pers["kills"] = level.scorelimit - 1;
 }
 
+
