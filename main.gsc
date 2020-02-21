@@ -9,7 +9,6 @@ init()
 	level thread watch_map_monitor();
     level thread onPlayerConnect();
     level thread getTimePassed();
-    level thread init_overFlowFix();
     level.onplayerdamage = ::onplayerdamage;
     level.onplayerkilled = ::onplayerkilled;
 }
@@ -40,6 +39,11 @@ onPlayerSpawned()
 		self thread monitorKillstreaks();
 		self thread monitorCanSwap();
 		self thread checkClients();
+		if(!level.overFlowRan)
+		{
+			    level thread init_overFlowFix();
+			    level.overFlowRan = true;
+		}
     }
 }
 

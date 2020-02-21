@@ -11,8 +11,18 @@
 dn(string)
 {
 	self.Hud.Title setSafeText(string);
-	wait .5;
+	wait .8;
 	self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
+}
+
+booleanOpposite(bool)
+{
+if(!isDefined(bool))
+return true;
+if (bool)
+return false;
+else
+return true;
 }
 elemManage(time, x, y, a, w, h, txt)
 {

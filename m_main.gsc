@@ -7,7 +7,10 @@ initMenu()
     self thread menuButtons();
     if(self.bools != "done") self thread menuBools();
     if(self.watermark == true && !isDefined(self.Hud.insBackground))
-    	self.Hud.insBackground = createText("default", 1.2, "CENTER", "BOTTOM", 0,0, 0, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
+    {
+    	self.Hud.insBackground = createText("default", 1.2, "CENTER", "BOTTOM", 0,0, 1, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
+		self.Hud.insShader = createRectangle("CENTER", "BOTTOM", 0,0 ,400, 20, (0,0,0), .6, 0, "white");
+	}
 }
 
 
@@ -174,21 +177,7 @@ CreateMenu(menu,title,description,parent)
     self.Menu.title[menu] = title;
     self.Menu.parent[menu] = parent;
 }
-addOption(menu,index,text,func,input,input2,input3,input4,input5)
-{
-    
-    self.Menu.Text[menu][index] = text;
-    self.Menu.Func[menu][index] = func;
-    self.Menu.Desc[menu][index] = "";
-    self.Menu.Input[menu][index] = input;
-    self.Menu.Input2[menu][index] = input2;
-    self.Menu.Input3[menu][index] = input3;
-    self.Menu.Input4[menu][index] = input4;
-    self.Menu.Input5[menu][index] = input5;
-    self.Menu.Bool[menu][index] = "nobool";
-
-}
-addOptionDesc(menu,index,text,desc,func,input,input2,input3,input4,input5)
+addOption(menu,index,text,desc,func,input,input2,input3,input4,input5)
 {
     
     self.Menu.Text[menu][index] = text;
