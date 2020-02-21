@@ -2,10 +2,10 @@
 
 saveLoad(param)
 {
-	if(param == 1){self.savedOrigin = self.origin;self.saveOrigin = true;self dn("Saved ^5Location");self iprintln("Saved ^5Location");
+	if(param == 1){self.savedOrigin = self.origin;self.saveOrigin = true;self dn("Saved ^5Location");
 	}
 	if(param == 2){
-		if(isDefined(self.savedOrigin)){self setOrigin(self.savedOrigin);self dn("Loaded ^2Location");self iprintln("Loaded ^2Location");
+		if(isDefined(self.savedOrigin)){self setOrigin(self.savedOrigin);self dn("Loaded ^2Location");
 		}
 		else self dn("Location is not saved!");
 	}
@@ -15,7 +15,7 @@ saveLoad(param)
 	}
 	if(param == 4){
 		if(!self.saveLoad){
-			self.saveLoad = true;self thread snlBinds();self dn("Save and Load Binds ^2Enabled");self iprintln("^7Press ^5[{+melee}] ^7& ^5[{+frag}]^7 while ^3prone^7 to ^5Save\n^7Press ^5[{+melee}] ^7& ^5[{+smoke}]^7 while ^3Crouched^7 to ^5Load \n");
+			self.saveLoad = true;self thread snlBinds();self dn("Save and Load Binds ^2Enabled");self iprintln("^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3prone^7 to ^5Save\n^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3Crouched^7 to ^5Load \n");
 		}
 		else { self notify("stop_snl"); self dn("Save and Load Binds ^1Disabled");self.saveLoad = false;
 		}
@@ -41,13 +41,13 @@ snlBinds()
 	self endon("stop_snl");
 	for(;;)
 	{
-		if(self meleeButtonPressed() && self secondaryOffHandButtonPressed() && self getStance() == "crouch")
+		if(self meleeButtonPressed() && self adsbuttonPressed() && self getStance() == "crouch")
 		{
 			if(isDefined(self.savedOrigin)) self saveLoad(2);
 			else self iprintln("^1Error: ^7Location Not Available.");
 			wait .2;
 		}
-		if(self meleeButtonPressed() && self fragButtonPressed() && self getStance() == "prone")
+		if(self meleeButtonPressed() && self adsbuttonPressed() && self getStance() == "prone")
 		{
 			self saveLoad(1);
 			wait .2;
@@ -67,7 +67,6 @@ gWeap(wep, menu)
 		self giveWeapon(wep+"_mp"+self.newAttach, self.newCamo);
 		self iprintln("^2" + wep + " Given!");
 		self SwitchToWeapon(wep+"_mp"+self.newAttach);
-
 }
 gAttach(atr)
 {
@@ -145,6 +144,11 @@ Slide( slidePosition, slideAngles )
 					}
 					wait 1;
 				}
+			
+				if(player.isVerified == false && player isInPos(slidePosition))
+				{
+					player iprintlnBold("VIP FEATURE ONLY");
+				}
 			}
 		}
 	wait .01;
@@ -160,7 +164,7 @@ vecXY( vec )
 {
    return (vec[0], vec[1], 0);
 }
-isInPos( sP ) //If you are going to use both the slide and the bounce make sure to change one of the thread's name because the distances compared are different in the two cases.
+isInPos( sP ) 
 {
 	if(distance( self.origin, sP ) < 100)
 		return true;

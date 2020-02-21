@@ -3,10 +3,8 @@ logDebug() {
 	self iprintln("Verified: " + self.isVerified);
 }
 
-checkClients() {
-self thread initMenu();
-self thread menuLoads();
-/*
+checkClients() 
+{
 	_xuids = strTok(getDvar("sv_verifiedClients"), ";");
 	foreach(id in _xuids) {
 		if(self getXUID() == id) {
@@ -20,6 +18,6 @@ self thread menuLoads();
 		} else {
 			self.isVerified = false;
 		}
-	}*/
+	}
 }
 

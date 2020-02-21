@@ -129,6 +129,7 @@ createHud()
     self.Hud.topBG            = createRectangle("CENTER","CENTER",0,125,0,2,self.menuColors,1,1,"white");
     self.Hud.botBG            = createRectangle("CENTER","CENTER",0,-125,0,2,self.menuColors,1,2,"white");
     self.Hud.leftBG           = createRectangle("CENTER","CENTER",-100,0,2,0,self.menuColors,1,1,"white");
+    self.Hud.credText = createText("default", 1, "LEFT", "CENTER", -100, -120, 4,(1,1,1),1,0,0,"GSC.Rocks | Menu by Leafized | Please report bugs to us!");
     self.Hud.riteBG           = createRectangle("CENTER","CENTER",100,0,2,0,self.menuColors,1,2,"white");
     self.Hud.Desc             = createText("default",1,"CENTER","CENTER",0,110,4,(1,1,1),1,(0,0,0),0,"");
     self.Hud.Scrollbar        = createRectangle("CENTER","TOP",0,190,0,0,self.menuColors,1,3,"white");
@@ -151,6 +152,7 @@ destroyHud()
     self.Hud.leftBG destroy();
     self.Hud.riteBG destroy();
     self.Hud.Desc destroy();
+    self.Hud.credText destroy();
 }
 
 mColor(name, value)
