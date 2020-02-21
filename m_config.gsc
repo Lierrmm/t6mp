@@ -9,7 +9,7 @@ menuBools(){
 	self.freezeIn = false;
 	self.watermark = true;
 	self.loadSpawn = false;
-    self.Hud.insBackground = createText("default", 1.2, "CENTER", "BOTTOM", 0,0, 1, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
+    self.Hud.insBackground = createText("default", 1.2, "CENTER", "BOTTOM", 0,0, 1, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+actionslot 1}] & [{+actionslot 2}] to Scroll | [{+melee}] to go Back or Close");
 	self.Hud.insShader = createRectangle("CENTER", "BOTTOM", 0,0 ,340, 20, (0,0,0), .6, 0, "white");
 }
 
