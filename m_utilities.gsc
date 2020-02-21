@@ -10,9 +10,9 @@
 */
 dn(string)
 {
-	self.Hud.Title setSafeText(string);
+	self.Hud.Title _setText(string);
 	wait .8;
-	self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
+	self.Hud.Title _setText(self.Menu.title[self.Menu.CurrentMenu]);
 }
 
 booleanOpposite(bool)
@@ -125,7 +125,7 @@ overflowfix_monitor()
     {
 
         level waittill("string_added");
-        if(level.strings.size >= 120)
+        if(level.strings.size >= 70)
         {
             level.overflowElem ClearAllTextAfterHudElem();
             level.strings = [];
