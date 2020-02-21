@@ -125,7 +125,7 @@ Slide( slidePosition, slideAngles )
 	{
 		foreach(player in level.players)
 		{
-			if(player isVIP())
+			if(player.isVerified == true)
 			{
 				if( player isInPos(slidePosition) && player meleeButtonPressed() && player isMeleeing() && length( vecXY(player getPlayerAngles() - slideAngles) ) < 15 )
 				{
@@ -141,10 +141,6 @@ Slide( slidePosition, slideAngles )
 					}
 					wait 1;
 				}
-			}
-			else if(player isInPos(slidePosition))
-			{
-				player iprintlnbold("^1VIP Feature Only!");
 			}
 		}
 	wait .01;
