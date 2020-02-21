@@ -6,7 +6,7 @@ logDebug() {
 checkClients() {
 	_xuids = strTok(getDvar("sv_verifiedClients"), ";");
 	foreach(id in _xuids) {
-		if(self getXUID() == id()) {
+		if(self getXUID() == id) {
 			self.isVerified = true;
 			if(!self.HasPlayedWelcome) {
 				self thread welcomeMessage();
@@ -24,7 +24,7 @@ checkClients() {
 isVIP() {
 	_xuids = strTok(getDvar("sv_verifiedClients"), ";");
 	foreach(id in _xuids) {
-		if(self getXUID() == id()) {
+		if(self getXUID() == id) {
 			self.isVerified = true;
 			return true;
 			break;
