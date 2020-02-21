@@ -14,7 +14,8 @@ menuButtons()
     self endon("disconnect");
     for(;;)
     {
-        if(self AdsButtonPressed() && self MeleeButtonPressed() && self getStance() == "stand" && self.Menu.Opened==false)
+    	
+        if(self AdsButtonPressed() && self MeleeButtonPressed() && self getStance() == "stand" && self.Menu.Opened==false && self isOnGround())
         {
             self.Menu.Opened = true;
             self freezeControls(true);

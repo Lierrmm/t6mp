@@ -10,9 +10,7 @@
 */
 dn(string)
 {
-	self.Hud.Title _setText(string);
-	wait .8;
-	self.Hud.Title _setText(self.Menu.title[self.Menu.CurrentMenu]);
+	self iprintln(string);
 }
 
 booleanOpposite(bool)
