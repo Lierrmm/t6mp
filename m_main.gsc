@@ -25,13 +25,13 @@ menuButtons()
             	self freezeControls(true);
             wait .2;
         }
-        if(self AdsButtonPressed() && self.Menu.Opened==true)
+        if(self ActionSlotOneButtonPressed() && self.Menu.Opened==true)
         {
             self.Scroller --;
             self scrollAnim();
             self aioscroll();
         }
-        if(self AttackButtonPressed() && self.Menu.Opened==true)
+        if(self ActionSlotTwoButtonPressed() && self.Menu.Opened==true)
         {
             self.Scroller ++;
             self scrollAnim();

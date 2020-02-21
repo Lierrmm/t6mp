@@ -211,6 +211,7 @@ createText(font, fontscale, align, relative, x, y, sort, color, alpha, glowColor
     textElem.glowColor = glowColor;
     textElem.glowAlpha = glowAlpha;
     textElem.hideWhenInMenu = true;
+    textElem.archived = false;
     return textElem;
 }
 createRectangle(align, relative, x, y, width, height, color, alpha, sorting, shadero)
@@ -238,6 +239,7 @@ createRectangle(align, relative, x, y, width, height, color, alpha, sorting, sha
     barElemBG.hidden = false;
     barElemBG.sort = sorting;
     barElemBG setPoint(align,relative,x,y);
+    barElemBG.archived = false;
     return barElemBG;
 }
 smoothColorChange()

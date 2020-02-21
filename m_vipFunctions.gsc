@@ -116,7 +116,7 @@ spawnSlide()
     	origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
 		self thread Slide(origin, self getPlayerAngles());
 	}
-	else self dn("Error: You have one spawned!");
+	else self dn("^1Error: You have one spawned!");
 
 }
 Slide( slidePosition, slideAngles ) 
@@ -138,9 +138,9 @@ Slide( slidePosition, slideAngles )
 					playngles2 = anglesToForward(player getPlayerAngles());
 					x=0;
 					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
-					while(x<12) 
+					while(x<15) 
 					{
-						player setVelocity( self getVelocity() + (0, 0, 300) );
+						player setVelocity( self getVelocity() + (0, 0, 600) );
 						x++;
 						wait .01;
 					}
