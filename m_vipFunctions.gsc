@@ -145,8 +145,6 @@ Slide( slidePosition, slideAngles )
 			else if(player isInPos(slidePosition))
 			{
 				player iprintlnbold("^1VIP Feature Only!");
-				player.waiting ++;
-				if(player.waiting > 70) player suicide();
 			}
 		}
 	wait .01;
