@@ -20,12 +20,17 @@ saveLoad(param)
 		else { self notify("stop_snl"); self dn("Save and Load Binds ^1Disabled");self.saveLoad = false;
 		}
 	}
-	if(param == 5){
-		if(!self.loadSpawn){
-			self.loadSpawn = true; self dn("Load on Spawn ^2Enabled");
+	if(param == 5)
+	{
+		if(!self.loadSpawn)
+		{
+			self.loadSpawn = true; 
+			self dn("Load on Spawn ^2Enabled");
 		}
-		else{
-			self.loadSpawn = false; self dn("Load on Spawn ^1Disabled");
+		else
+		{
+			self.loadSpawn = false; 
+			self dn("Load on Spawn ^1Disabled");
 		}
 	}
 }
