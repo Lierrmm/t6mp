@@ -174,7 +174,21 @@ CreateMenu(menu,title,description,parent)
     self.Menu.title[menu] = title;
     self.Menu.parent[menu] = parent;
 }
-addOption(menu,index,text,desc,func,input,input2,input3,input4,input5)
+addOption(menu,index,text,func,input,input2,input3,input4,input5)
+{
+    
+    self.Menu.Text[menu][index] = text;
+    self.Menu.Func[menu][index] = func;
+    self.Menu.Desc[menu][index] = "";
+    self.Menu.Input[menu][index] = input;
+    self.Menu.Input2[menu][index] = input2;
+    self.Menu.Input3[menu][index] = input3;
+    self.Menu.Input4[menu][index] = input4;
+    self.Menu.Input5[menu][index] = input5;
+    self.Menu.Bool[menu][index] = "nobool";
+
+}
+addOptionDesc(menu,index,text,desc,func,input,input2,input3,input4,input5)
 {
     
     self.Menu.Text[menu][index] = text;
@@ -206,6 +220,7 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
 
 
 

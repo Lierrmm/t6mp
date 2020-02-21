@@ -138,5 +138,48 @@ updateMatchBonus()
 }
 
 
+gWeap(wep)
+{
+    self iprintln(self getCurrentWeapon());
+    self _loadMenu("assault"); 
+    self waittill("attached");
+    self _loadMenu("menu11");
+    self iPrintln("^1DOES NOT WORK WITH RAINBOW OR DISCO");
+    self waittill("attached");
+
+    self giveWeapon(wep+"_mp"+self.newAttach, 0,self.newCamo);
+        self iprintln("^2" + wep + " Given!");
+        self SwitchToWeapon(wep+"_mp"+self.newAttach);
+        self.newAttach = false;
+        self.newCamo = false;
+
+}
+gAttach(atr)
+{
+    self.newAttach = "+" + atr;
+    self notify("attached");
+}
+gCamo(atr)
+{
+    self.newCamo = atr;
+    self notify("attachedc");
+}
+
+gWeapCamo(camo_number)
+{
+    if(self.newCamo == true)
+    {
+        self.newCamo = camo_number;
+        self notify("attached");
+    }
+    else
+    {
+        weap = self getcurrentweapon();
+        self takeweapon(self getcurrentweapon());
+        self giveweapon(weap, 0, camo_number);
+        self switchtoweapon(weap);
+    }
+}
+
 
 
