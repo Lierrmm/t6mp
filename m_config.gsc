@@ -3,12 +3,11 @@ example: by default if a mod is disabled, write the var . false here.*/
 
 menuBools(){
     self.bools      = "done";
-    if(isDefined(getDvar(self getXUID() + "m_color"))){
-    	var = getDvar(self getXUID() + "m_color");self.menuColors = getTheme(var);self iprintln("Saved color ^2Set!");
-    }
-    self.menuColors = (1,0.4,0);
+    self getTheme();
     level.numberOfSlides = 0;
 	self.loadSpawn = false;
+	self.freezeIn = false;
+	self.watermark = true;
 }
 
 menuLoads(){
