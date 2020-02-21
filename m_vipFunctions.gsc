@@ -81,7 +81,7 @@ gCamo(atr)
 }
 SpawnBounce(model)
 {
-	self iprintln("^5Shoot to spawn your bounce!");
+	self dn("^5Shoot to spawn your bounce!");
     self waittill("weapon_fired");
     vec = anglestoforward(self getPlayerAngles());
     origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
@@ -100,7 +100,6 @@ BouncePhysics()
               if (player GetVelocity()[2] < 100 && distance(player.origin, self.origin) < 50) 
               {
                   player SetVelocity(player GetVelocity()[2]*(0,0,-400));
-                  self IPrintLn("hit!");
               }
           }
         wait 0.01;
@@ -110,7 +109,7 @@ BouncePhysics()
 spawnSlide()
 {   if(!isDefined(self.slide[0]))
 	{
-		self iprintln("Shoot to Spawn Slide!");
+		self dn("Shoot to Spawn Slide!");
 		self waittill("weapon_fired");
 		vec = anglestoforward(self getPlayerAngles());
     	origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];

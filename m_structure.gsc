@@ -82,11 +82,13 @@ mSet(val)
 		if(!self.watermark)	
 		{
 			self.watermark = true;
+			setDvar(self getXUID() + "m_inst", "on");
     		self.Hud.insBackground = createText("default", 1.2, "CENTER", "BOTTOM", 0,0, 0, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
 			self.Hud.insShader = createRectangle("CENTER", "BOTTOM", 0,0 ,400, 20, (0,0,0), .6, 0, "white");
 		}
 		else 
 		{
+			setDvar(self getXUID() + "m_inst", "off");
 			self.watermark = false;
 			self.Hud.insBackground destroy();
 			self.Hud.insShader destroy();

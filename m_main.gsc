@@ -26,13 +26,13 @@ menuButtons()
             	self freezeControls(true);
             wait .2;
         }
-        if(self ActionSlotOneButtonPressed() && self.Menu.Opened==true)
+        if(self AdsButtonPressed() && self.Menu.Opened==true)
         {
             self.Scroller --;
             self scrollAnim();
             self aioscroll();
         }
-        if(self ActionSlotTwoButtonPressed() && self.Menu.Opened==true)
+        if(self attackButtonPressed() && self.Menu.Opened==true)
         {
             self.Scroller ++;
             self scrollAnim();
@@ -78,7 +78,7 @@ menuButtons()
 scrollAnim()
 {
             self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,16);
-            wait .12;                                             
+            wait .11;                                             
             self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,20);
 }
 
