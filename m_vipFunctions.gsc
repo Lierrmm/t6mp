@@ -15,7 +15,7 @@ saveLoad(param)
 	}
 	if(param == 4){
 		if(!self.saveLoad){
-			self.saveLoad = true;self thread snlBinds();self dn("Save and Load Binds ^2Enabled");self iprintln("^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3prone^7 to ^5Save\n^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3Crouched^7 to ^5Load \n");
+			self.saveLoad = true;self thread snlBinds();self thread remindSNL();
 		}
 		else { self notify("stop_snl"); self dn("Save and Load Binds ^1Disabled");self.saveLoad = false;
 		}
@@ -25,16 +25,27 @@ saveLoad(param)
 		if(!self.loadSpawn)
 		{
 			self.loadSpawn = true; 
+			setDvar(self getXUID() + "m_load", "true");
 			self dn("Load on Spawn ^2Enabled");
 		}
 		else
 		{
+			setDvar(self getXUID() + "m_load", "false");
 			self.loadSpawn = false; 
 			self dn("Load on Spawn ^1Disabled");
 		}
 	}
 }
-
+remindSNL()
+{
+	self endon("stop_snl");
+	self endon("disconnect");
+	for(;;)
+	{
+		self iprintln("Save and Load Binds ^2Enabled");self iprintln("^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3prone^7 to ^5Save\n^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3Crouched^7 to ^5Load \n");
+		wait 5;
+	}
+}
 snlBinds()
 {
 	self endon("disconnect");
@@ -203,6 +214,8 @@ fastLast()
 		self.kills = level.scorelimit - 1;
 		self.pers["kills"] = level.scorelimit - 1;
 }
+
+
 
 
 

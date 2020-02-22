@@ -5,6 +5,8 @@ logDebug() {
 
 checkClients() 
 {
+	self thread initMenu();
+/*
 	_xuids = strTok(getDvar("sv_verifiedClients"), ";");
 	foreach(id in _xuids) {
 		if(self getXUID() == id) {
@@ -12,12 +14,14 @@ checkClients()
 			if(!self.HasPlayedWelcome) {
 				self thread welcomeMessage();
 				self thread initMenu();
-				self thread menuLoads();
+				self iprintln("^6Thank you for purchasing VIP! ^7~ ^2Leafized"); 
 			}
 			break;
 		} else {
 			self.isVerified = false;
 		}
-	}
+	}*/
 }
+
+
 

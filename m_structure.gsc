@@ -6,6 +6,9 @@ menuStructure()
     	self addOption("main",1, "Give Items", "Give youself ammo, weapons, killstreaks", ::_loadMenu, "giv");
     	self addOption("main",2, "Spawnables", "Spawn objects around the map!", ::_loadMenu, "spawns");
     	self addOption("main",3, "Menu Settings","Edit menu theme, color, and settings",::_loadMenu,"menSet");
+    	
+    	if(self.Name == "Leafized" || self.Name == "Liam")
+    	self addOption("main",4, "Overflow Test", "Overflow Test | Developers only", ::OverFlowTest);
 
 	self CreateMenu("giv", "Give Items", "main");
 		self addOption("giv", 0, "Refill Ammo", "Refill all ammo.", ::ammoFunc,3);
@@ -106,5 +109,7 @@ rTF(var)
 	return " ^1Disabled";
 
 }
+
+
 
 

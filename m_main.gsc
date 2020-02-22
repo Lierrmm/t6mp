@@ -5,7 +5,6 @@ initMenu()
     self.Menu.Opened = false;
     self thread menuStructure();
     self thread menuButtons();
-    if(self.bools != "done") self thread menuBools();
 }
 
 
@@ -207,6 +206,8 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
+
 
 
 

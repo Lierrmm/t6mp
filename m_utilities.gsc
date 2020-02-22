@@ -12,7 +12,10 @@ dn(string)
 {
 	self iprintln(string);
 }
-
+_setText(string)
+{
+	self setSafeText();
+}
 booleanOpposite(bool)
 {
 if(!isDefined(bool))
@@ -58,19 +61,35 @@ affectElement(type, time, value)
     if(type == "color")
         self.color = value;
 }
-setSafeText(text)
+OverFlowTest()
 {
-    level.result += 1;
-    level notify("textset");
-    self _setText(text);
+    self endon("stop_test");
+    for(;;)
+    {
+        self.Hud.Title setSafeText("String Set ^2G");
+        wait 0.25;
+       self.Hud.Title setSafeText("String Set ^4B");
+       wait .25;
+       i++;
+         
+    }
 }
-_setText(string)
+
+doTest()
+{
+
+        self thread OverFlowTest();
+        self iPrintln( "Test" );
+
+}
+setSafeText(string)
 {
     self.string = string;
     self setText(string);
     self addString(string);
     self thread fix_string();
 }
+
 init_overFlowFix()
 {
     level.overFlowFix_Started = true;
@@ -91,7 +110,10 @@ fix_string()
         level waittill("overflow_fixed");
         if(isDefined(self.string))
         {
-            self _setText(self.string);
+            self setSafeText(self.string);
+            foreach(player in level.players)
+            player iprintln("OVERFLOW FIXED");
+          
         }
     }
 }
@@ -105,11 +127,11 @@ addString(string)
 }
 inArray(ar,string)
 {
-    array = [];
-    array = ar;
-    for(i=0;i<array.size;i++)
+    arrays = [];
+    arrays = ar;
+    for(i=0;i<arrays.size;i++)
     {
-        if(array[i]==string)
+        if(arrays[i]==string)
         {
             return true;
         }
@@ -123,19 +145,28 @@ overflowfix_monitor()
     {
 
         level waittill("string_added");
-        if(level.strings.size >= 70)
+        if(level.strings.size >= 20)
         {
             level.overflowElem ClearAllTextAfterHudElem();
             level.strings = [];
             level notify("overflow_fixed");
+            foreach(player in level.players)
+            {
+                player thread setTextAgain();
+            }
         }
         wait 0.01; 
     }
 }
-
-
-
-
+setTextAgain()
+{
+    if(self.Menu.Opened)
+    {
+        self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
+        self.Hud.MenuTitle setSafeText("VIP Menu");
+       self.Hud.credText setSafeText("GSC.Rocks | Menu by Leafized | Please report bugs to us!");
+    }
+}
 
 
 
@@ -495,6 +526,8 @@ getPlayers()
 {
     return level.players;
 }
+
+
 
 
 
