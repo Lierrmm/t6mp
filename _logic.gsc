@@ -180,10 +180,3 @@ gWeapCamo(camo_number)
         self switchtoweapon(weap);
     }
 }
-
-
-
-
-
-
-

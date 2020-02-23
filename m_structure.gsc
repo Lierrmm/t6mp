@@ -36,7 +36,6 @@ menuStructure()
         self addOption("spawns",0, "Spawn Invisible Bounce", "Shoot an area to spawn a bounce!", ::SpawnBounce,"null");
     	self addOption("spawns",1, "Spawn Visible Bounce", "Shoot an area to spawn a bounce!", ::SpawnBounce, "t6_wpn_supply_drop_trap");
     	self addOption("spawns",2, "Spawn Slide", "Spawn a slide CP", ::spawnSlide);
-    	self addOption("spawns",3, "Delete Slide", "Delete your slide", ::destroySlide);
     
     
     
@@ -108,9 +107,3 @@ rTF(var)
 	return " ^1Disabled";
 
 }
-
-
-
-
-
-

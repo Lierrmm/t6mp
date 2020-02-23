@@ -9,11 +9,3 @@ monitorKillstreaks() {
 	}
 	wait 0.05;
 }
-
-
-
-
-
-
-
-

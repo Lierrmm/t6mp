@@ -117,59 +117,43 @@ BouncePhysics()
 }
 
 spawnSlide()
-{   if(!isDefined(self.slide[0]))
-	{
-		self dn("Shoot to Spawn Slide!");
-		self waittill("weapon_fired");
-		vec = anglestoforward(self getPlayerAngles());
+{   
+	self iprintln("^5Shoot to spawn your slide!");
+	self waittill("weapon_fired");
+	vec = anglestoforward(self getPlayerAngles());
     	origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
-		self thread Slide(origin, self getPlayerAngles());
-	}
-	else self dn("^1Error: You have one spawned!");
-
+	self thread Slide(origin, self getPlayerAngles());
 }
+
 Slide( slidePosition, slideAngles ) 
 {
-	self endon( "game_ended" );
-	self endon("death_slide");
-	self.slide[0] = spawn("script_model", slidePosition);
-	self.slide[0].angles = (0,slideAngles[1]-90,60);
-	self.slide[0] setModel("t6_wpn_supply_drop_trap");
+	level endon( "game_ended" );
+	level.slide[level.numberOfSlides] = spawn("script_model", slidePosition);
+	level.slide[level.numberOfSlides].angles = (0,slideAngles[1]-90,60);
+	level.slide[level.numberOfSlides] setModel("t6_wpn_supply_drop_trap");
+	level.numberOfSlides++;
 	for(;;)
 	{
 		foreach(player in level.players)
 		{
-			if(player.isVerified == true)
+			if( player isInPos(slidePosition) && player meleeButtonPressed() && player isMeleeing() && length( vecXY(player getPlayerAngles() - slideAngles) ) < 15 )
 			{
-				if( player isInPos(slidePosition) && player meleeButtonPressed() && player isMeleeing() && length( vecXY(player getPlayerAngles() - slideAngles) ) < 15 )
+				player setOrigin( player getOrigin() + (0, 0, 10) );
+				playngles2 = anglesToForward(player getPlayerAngles());
+				x=0;
+				player setVelocity( player getVelocity() + (playngles2[0]*1000, playngles2[1]*1000, 0) );
+				while(x<15) 
 				{
-					player setOrigin( player getOrigin() + (0, 0, 10) );
-					playngles2 = anglesToForward(player getPlayerAngles());
-					x=0;
-					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
-					while(x<15) 
-					{
-						player setVelocity( self getVelocity() + (0, 0, 600) );
-						x++;
-						wait .01;
-					}
-					wait 1;
+					player setVelocity( self getVelocity() + (0, 0, 999) );
+					x++;
+					wait .01;
+					
 				}
-			
-				if(player.isVerified == false && player isInPos(slidePosition))
-				{
-					player iprintlnBold("VIP FEATURE ONLY");
-				}
+				wait 1;
 			}
 		}
 	wait .01;
     }
-}
-destroySlide()
-{
-	self.slide[0] delete();
-	self dn("Destroyed Your Slide");
-	self notify("death_slide");
 }
 vecXY( vec )
 {
@@ -214,11 +198,3 @@ fastLast()
 		self.kills = level.scorelimit - 1;
 		self.pers["kills"] = level.scorelimit - 1;
 }
-
-
-
-
-
-
-
-
