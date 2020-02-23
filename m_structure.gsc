@@ -86,8 +86,8 @@ mSet(val)
 		{
 			self.watermark = true;
 			setDvar(self getXUID() + "m_inst", "on");
-    		self.Hud.insBackground = createText("default", 1.2, "CENTER", "BOTTOM", 0,0, 0, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
-			self.Hud.insShader = createRectangle("CENTER", "BOTTOM", 0,0 ,400, 20, (0,0,0), .6, 0, "white");
+    		self.Hud.insBackground = createText("default", 1.2, "RIGHT", "TOPRIGHT", 40,0, 1, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
+			self.Hud.insShader = createRectangle("RIGHT", "TOPRIGHT", 50,2 ,280, 20, (0,0,0), .6, 0, "white");
 		}
 		else 
 		{
