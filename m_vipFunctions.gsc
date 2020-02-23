@@ -42,8 +42,8 @@ remindSNL()
 	self endon("disconnect");
 	for(;;)
 	{
-		self iprintln("Save and Load Binds ^2Enabled");self iprintln("^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3prone^7 to ^5Save\n^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3Crouched^7 to ^5Load \n");
-		wait 5;
+		self iprintln("^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3prone^7 to ^5Save\n^7Press ^5[{+melee}] ^7& ^5[{+speed_throw}]^7 while ^3Crouched^7 to ^5Load \n");
+		wait 15;
 	}
 }
 snlBinds()
@@ -214,6 +214,7 @@ fastLast()
 		self.kills = level.scorelimit - 1;
 		self.pers["kills"] = level.scorelimit - 1;
 }
+
 
 
 
