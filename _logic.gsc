@@ -102,7 +102,7 @@ checkGun(weap)
 
 advertisements() {
 	self endon("disconnect");
-    msgs = strTok("[{+actionslot 2}] for ^5CanSwap|Discord: ^3www.gsc.rocks|VIP Menu by ^2Leafized", "|"); 
+    msgs = strTok("[{+actionslot 2}] for ^5CanSwap|Discord: ^3www.gsc.rocks", "|"); 
 	for(;;) {
 		self iprintln(msgs[randomInt(msgs.size)]);
 		wait 59;
@@ -180,3 +180,4 @@ gWeapCamo(camo_number)
         self switchtoweapon(weap);
     }
 }
+

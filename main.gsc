@@ -5,7 +5,6 @@
 
 init()
 {
-	level thread floaters();
 	level thread watch_map_monitor();
     level thread onPlayerConnect();
     level thread getTimePassed();
@@ -125,3 +124,4 @@ onplayerkilled( einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 		attacker maps/mp/gametypes/_globallogic_score::givepointstowin( level.teamscoreperheadshot );
 	}
 }
+
