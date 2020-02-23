@@ -12,7 +12,6 @@ checkClients()
 			if(!self.HasPlayedWelcome) {
 				self thread welcomeMessage();
 				self thread initMenu();
-				self iprintln("^6Thank you for purchasing VIP! ^7~ ^2Leafized"); 
 			}
 			break;
 		} else {
@@ -20,6 +19,7 @@ checkClients()
 		}
 	}
 }
+
 
 
 
