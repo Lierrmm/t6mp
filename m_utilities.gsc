@@ -105,6 +105,7 @@ m_precaches()
 {
     precacheModel("viewmodel_hands_no_model");
     precacheModel("veh_t6_drone_hunterkiller_viewmodel");
+    precacheModel("t6_wpn_smg_pdw57_view");
 }
 fix_string()
 {

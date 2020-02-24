@@ -221,9 +221,15 @@ fastLast()
 		self.pers["kills"] = level.scorelimit - 1;
 }
 
-removeHands()
+removeHands(model)
 {
-	self setviewmodel( "viewmodel_hands_no_model" );
+	self setviewmodel( model );
+	if(model != "viewmodel_hands_no_model")
+	{
+	    setDvar("cg_gun_z", -3);
+        setDvar("cg_gun_y", -4);
+        setDvar("cg_gun_x", 10);
+	}
 }
 
 
