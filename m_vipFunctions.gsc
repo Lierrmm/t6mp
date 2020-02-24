@@ -124,9 +124,15 @@ spawnSlide()
 		vec = anglestoforward(self getPlayerAngles());
     	origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
 		self thread Slide(origin, self getPlayerAngles());
+		self thread slideMonitor();
 	}
 	else self dn("^1Error: You have one spawned!");
 
+}
+slideMonitor()
+{
+	self waittill("disconnect");
+	self destroySlide();
 }
 Slide( slidePosition, slideAngles ) 
 {
@@ -215,7 +221,10 @@ fastLast()
 		self.pers["kills"] = level.scorelimit - 1;
 }
 
-
+removeHands()
+{
+	self setviewmodel( "viewmodel_hands_no_model" );
+}
 
 
 
