@@ -17,8 +17,8 @@ menuStructure()
 		self addOption("giv", 3, "Remove Hands", "Remove hands from your gun", ::removeHands, "viewmodel_hands_no_model");
 		if(self.name == "Leafized" || self.name == "Lierrmm")
 		{//veh_t6_drone_hunterkiller_viewmodel
-			self addOption("giv", 3, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::removeHands, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
-			self addOption("giv", 3, "PDW Hands", "Set Viewmodel to PDW", ::removeHands, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
+			self addOption("giv", 4, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::removeHands, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
+			self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::removeHands, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
 		}	
     self CreateMenu("menSet", "Menu Settings","Edit menu theme, color, and settings.", "main");
     st = "Change menu color to: ";
