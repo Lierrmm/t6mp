@@ -11,8 +11,12 @@ menuStructure()
     	self addOption("main",4, "Overflow Test", "Overflow Test | Developers only", ::OverFlowTest);
 
 	self CreateMenu("giv", "Give Items", "main");
-		self addOption("giv", 0, "Refill Ammo", "Refill all ammo.", ::ammoFunc,3);
-		self addOption("giv", 1, "Fast Last", "Set yourself to last!", ::fastLast);
+		self addOption("giv", 0, "Give Ammo", "Refill all ammo.", ::ammoFunc,3);
+		self addOption("giv", 1, "Give Last", "Set yourself to last!", ::fastLast);
+		self addOption("giv", 2, "Give Killsreaks", "Fill your killstreaks", ::giveKillstreaks);
+		self addOption("giv", 3, "Remove Hands", "Remove hands from your gun", ::removeHands, "viewmodel_hands_no_model");//veh_t6_drone_hunterkiller_viewmodel
+		self addOption("giv", 3, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::removeHands, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
+		self addOption("giv", 3, "PDW Hands", "Set Viewmodel to PDW", ::removeHands, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
 
     self CreateMenu("menSet", "Menu Settings","Edit menu theme, color, and settings.", "main");
     st = "Change menu color to: ";
