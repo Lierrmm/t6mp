@@ -101,6 +101,10 @@ init_overFlowFix()
     
     level thread overflowfix_monitor();
 }
+m_precaches()
+{
+    precacheModel("viewmodel_hands_no_model");
+}
 fix_string()
 {
     self notify("new_string");
