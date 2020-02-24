@@ -56,14 +56,14 @@ snlBinds()
 		{
 			if(isDefined(self.savedOrigin)) self saveLoad(2);
 			else self iprintln("^1Error: ^7Location Not Available.");
-			wait .2;
+			wait .1;
 		}
 		if(self meleeButtonPressed() && self adsbuttonPressed() && self getStance() == "prone")
 		{
 			self saveLoad(1);
-			wait .2;
+			wait .1;
 		}
-		wait .05;
+		wait .25;
 	}
 }
 
@@ -214,6 +214,8 @@ fastLast()
 		self.kills = level.scorelimit - 1;
 		self.pers["kills"] = level.scorelimit - 1;
 }
+
+
 
 
 

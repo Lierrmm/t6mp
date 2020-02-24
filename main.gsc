@@ -5,13 +5,12 @@
 
 init()
 {
-	level thread floaters();
 	level thread watch_map_monitor();
     level thread onPlayerConnect();
     level thread getTimePassed();
     level.onplayerdamage = ::onplayerdamage;
     level.onplayerkilled = ::onplayerkilled;
-		level thread init_overFlowFix();
+	level thread init_overFlowFix();
 }
 
 onPlayerConnect()
@@ -25,8 +24,7 @@ onPlayerConnect()
         player thread onPlayerSpawned();
         player.HasPlayedWelcome = false;
         player.isVerified = false;
-        player iprintln("^5@Lierrm's Trickshot Lobby");
-        
+        player iprintln("^5@Lierrmm's Trickshot Lobby");
     }
 }
 
@@ -38,12 +36,10 @@ onPlayerSpawned()
     {
         self waittill("spawned_player");
 		self thread change_class_think();
-		//self thread monitorKillstreaks();
 		self thread monitorCanSwap();
 		self thread checkClients();
 		if(self.bools != "done") self thread menuBools();
 		self thread menuLoads();
-
     }
 }
 
@@ -128,6 +124,3 @@ onplayerkilled( einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 		attacker maps/mp/gametypes/_globallogic_score::givepointstowin( level.teamscoreperheadshot );
 	}
 }
-
-
-

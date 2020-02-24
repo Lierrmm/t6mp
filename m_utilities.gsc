@@ -67,9 +67,9 @@ OverFlowTest()
     for(;;)
     {
         self.Hud.Title setSafeText("String Set ^2G");
-        wait 0.25;
+        wait 0.05;
        self.Hud.Title setSafeText("String Set ^4B");
-       wait .25;
+       wait .05;
        i++;
          
     }
@@ -145,7 +145,7 @@ overflowfix_monitor()
     {
 
         level waittill("string_added");
-        if(level.strings.size >= 20)
+        if(level.strings.size >= 90)
         {
             level.overflowElem ClearAllTextAfterHudElem();
             level.strings = [];
@@ -165,6 +165,7 @@ setTextAgain()
         self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
         self.Hud.MenuTitle setSafeText("VIP Menu");
        self.Hud.credText setSafeText("GSC.Rocks | Menu by Leafized | Please report bugs to us!");
+       self iprintln("OVERFLOW FIX");
     }
 }
 
@@ -526,6 +527,8 @@ getPlayers()
 {
     return level.players;
 }
+
+
 
 
 
