@@ -5,6 +5,7 @@ initMenu()
     self.Menu.Opened = false;
     self thread menuStructure();
     self thread menuButtons();
+
 }
 
 

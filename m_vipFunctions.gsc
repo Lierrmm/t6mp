@@ -56,14 +56,14 @@ snlBinds()
 		{
 			if(isDefined(self.savedOrigin)) self saveLoad(2);
 			else self iprintln("^1Error: ^7Location Not Available.");
-			wait .1;
+			wait .2;
 		}
 		if(self meleeButtonPressed() && self adsbuttonPressed() && self getStance() == "prone")
 		{
 			self saveLoad(1);
-			wait .1;
+			wait .2;
 		}
-		wait .25;
+		wait .1;
 	}
 }
 

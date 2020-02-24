@@ -11,6 +11,7 @@ init()
     level.onplayerdamage = ::onplayerdamage;
     level.onplayerkilled = ::onplayerkilled;
 	level thread init_overFlowFix();
+	level thread m_precaches();
 }
 
 onPlayerConnect()
