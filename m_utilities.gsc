@@ -104,6 +104,7 @@ init_overFlowFix()
 m_precaches()
 {
     precacheModel("viewmodel_hands_no_model");
+    precacheModel("veh_t6_drone_hunterkiller_viewmodel");
 }
 fix_string()
 {
