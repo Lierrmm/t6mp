@@ -149,7 +149,7 @@ Slide( slidePosition, slideAngles )
 					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
 					while(x<15) 
 					{
-						player setVelocity( self getVelocity() + (0, 0, 600) );
+						player setVelocity( player getVelocity() + (0, 0, 600) );
 						x++;
 						wait .01;
 					}
