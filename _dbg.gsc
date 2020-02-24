@@ -5,8 +5,6 @@ logDebug() {
 
 checkClients() 
 {
-self thread initMenu();
-
 	_xuids = strTok(getDvar("sv_verifiedClients"), ";");
 	foreach(id in _xuids) {
 		if(self getXUID() == id) {
