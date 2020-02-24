@@ -5,12 +5,6 @@ initMenu()
     self.Menu.Opened = false;
     self thread menuStructure();
     self thread menuButtons();
-    if(self.bools != "done") self thread menuBools();
-    if(self.watermark == true && !isDefined(self.Hud.insBackground))
-    {
-    	self.Hud.insBackground = createText("default", 1.2, "CENTER", "BOTTOM", 0,0, 1, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
-	self.Hud.insShader = createRectangle("CENTER", "BOTTOM", 0,0 ,400, 20, (0,0,0), .6, 0, "white");
-    }
 }
 
 
@@ -19,6 +13,7 @@ menuButtons()
     self endon("disconnect");
     for(;;)
     {
+    	
         if(self AdsButtonPressed() && self MeleeButtonPressed() && self getStance() == "stand" && self.Menu.Opened==false && self isOnGround())
         {
             self.Menu.Opened = true;
@@ -81,9 +76,9 @@ menuButtons()
 }
 scrollAnim()
 {
-    self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,16);
-    wait .11;                                             
-    self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,20);
+            self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,16);
+            wait .11;                                             
+            self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,20);
 }
 
 _loadMenu(menu)
@@ -211,3 +206,18 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

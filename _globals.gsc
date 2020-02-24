@@ -16,3 +16,13 @@ welcomeMessage()
 	self thread maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
 	self.HasPlayedWelcome = true;
 }
+
+
+
+
+
+
+
+
+
+
