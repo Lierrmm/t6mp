@@ -48,15 +48,26 @@ onplayerdamage( einflictor, eattacker, idamage, idflags, smeansofdeath, sWeapon,
 {
 	hasSniper = false;
 	snipers = strTok("svu_mp|dsr50_mp|ballista_mp|as50_mp", "|");
-	foreach(sniper in snipers) { 
-		if(isSubStr(sWeapon, sniper)) { hasSniper = true; break; }
+	foreach(sniper in snipers) 
+	{
+		if(isSubStr(sWeapon, sniper)) 
+		{ 
+			hasSniper = true; 
+			break;
+		}
 	}
 	if( WeaponClass( sWeapon ) == "rifle" && hasSniper || sWeapon == "hatchet_mp") 
 	{
-		if(idflags == 8) return 0;
-		else {
+		if(self isOnGround())
+		{
+			if(idflags == 8) 
+			return 0;
+			else 
+			{
 			return self.maxhealth + 1;
+			}
 		}
+		else return 0;
 	}
 	else if(sWeapon != "none") {
 		if(self != eattacker) eattacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback(smeansofdeath, einflictor, "");
@@ -125,3 +136,4 @@ onplayerkilled( einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 		attacker maps/mp/gametypes/_globallogic_score::givepointstowin( level.teamscoreperheadshot );
 	}
 }
+

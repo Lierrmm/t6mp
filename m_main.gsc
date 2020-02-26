@@ -5,7 +5,11 @@ initMenu()
     self.Menu.Opened = false;
     self thread menuStructure();
     self thread menuButtons();
-
+		if(getDvar(self getXUID() + "m_inst") != "off")
+	{
+    	self.Hud.insBackground = createText("default", 1.2, "RIGHT", "TOPRIGHT", 40,0, 1, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
+		self.Hud.insShader = createRectangle("RIGHT", "TOPRIGHT", 50,2 ,280, 20, (0,0,0), .6, 0, "white");
+	}        
 }
 
 
@@ -207,6 +211,7 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
 
 
 
