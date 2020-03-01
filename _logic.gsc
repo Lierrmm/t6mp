@@ -102,10 +102,10 @@ checkGun(weap)
 
 advertisements() {
 	self endon("disconnect");
-    msgs = strTok("[{+actionslot 2}] for ^5CanSwap|Discord: ^3www.gsc.rocks|VIP Menu by ^2Leafized|^5Make menu suggestions!", "|"); 
+    msgs = strTok("[{+actionslot 2}] for ^5CanSwap|Discord: ^3www.gsc.rocks|VIP Menu by ^2Leafized|^5Make menu suggestions!|Prone + [{+smoke}] to give Killstreaks!", "|"); 
 	for(;;) {
 		self iprintln(msgs[randomInt(msgs.size)]);
-		wait 59;
+		wait 30;
 	}
 	wait 10;
 }
@@ -180,6 +180,8 @@ gWeapCamo(camo_number)
         self switchtoweapon(weap);
     }
 }
+
+
 
 
 

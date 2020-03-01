@@ -17,10 +17,10 @@ menuStructure()
 		self addOption("giv", 3, "Remove Hands", "Remove hands from your gun", ::removeHands, "viewmodel_hands_no_model");
 		if(self.name == "Leafized" || self.name == "Lierrmm")
 		{//veh_t6_drone_hunterkiller_viewmodel
-			self addOption("giv", 4, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::removeHands, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
-			self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::removeHands, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
+			self addOption("giv", 4, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::newViewModel, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
+			self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::newViewModel, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
 		}	
-    self CreateMenu("menSet", "Menu Settings","Edit menu theme, color, and settings.", "main");
+    self CreateMenu("menSet", "Menu Settings", "main");
     st = "Change menu color to: ";
     	self addOption("menSet",0,"Freeze in Menu", "Toggle whether you freeze while in menu.", ::mSet, 1);
     	self addOption("menSet",1,"Menu Instructions", "Enable or Disable Menu Instructions!", ::mSet,0);
@@ -32,7 +32,7 @@ menuStructure()
     	self addOption("menSet",7,"Blue",  st + "Blue",::mColor, (0,0,1), "B");
     	self addOption("menSet",8,"Cyan",  st + "Cyan",::mColor, (.2,.4,.7),"C");
     
-    self CreateMenu("loc", "Location Menu","These functions edit your location!", "main");
+    self CreateMenu("loc", "Location Menu", "main");
     	self addOption("loc",0,"Save Location","Save your current origin!",::saveLoad,1);
     	self addOption("loc",1, "Load Location", "Load your saved location!",::saveLoad,2);
     	self addOption("loc",2, "Clear Saved Location" ,"Clear your saved location!",::saveLoad,3);
@@ -115,6 +115,8 @@ rTF(var)
 	return " ^1Disabled";
 
 }
+
+
 
 
 

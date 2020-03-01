@@ -109,7 +109,7 @@ BouncePhysics()
           {
               if (player GetVelocity()[2] < 100 && distance(player.origin, self.origin) < 50) 
               {
-                  player SetVelocity(player GetVelocity()[2]*(0,0,-400));
+                  player SetVelocity(player GetVelocity()[2]*(0,0,-50));
               }
           }
         wait 0.01;
@@ -224,15 +224,54 @@ fastLast()
 removeHands(model)
 {
 	self setviewmodel( model );
-	if(model != "viewmodel_hands_no_model")
-	{
-	    setDvar("cg_gun_z", -3);
-        setDvar("cg_gun_y", -4);
-        setDvar("cg_gun_x", 10);
-	}
+	    if(!self.viewModelSet)
+    {
+    	self.viewModelSet = true;
+    	self thread viewModelToggle(model);
+    	self dn("View Model Set!");
+    }
+    else if(self.viewModelSet)
+    {
+    	self.viewModelSet = false;
+    	self notify("stop_hands");
+    	self dn("View Model will Reset on Death");
+    	
+    }
+}
+newViewModel(model)
+{
+	self setViewModel(model);
+	setDvar("cg_gun_z", -3);
+    setDvar("cg_gun_y", -4);
+    setDvar("cg_gun_x", 10);
+    
+    self dn("Viewmodel changed to ^5" + model);
+    if(!self.viewModelSet)
+    {
+    	self.viewModelSet = true;
+    	self thread viewModelToggle(model);
+    	self dn("View Model Set!");
+    }
+    else if(self.viewModelSet)
+    {
+    	self.viewModelSet = false;
+    	self notify("stop_hands");
+    	self dn("View Model will Reset on Death");
+    	
+    }
 }
 
 
+viewModelToggle(model)
+{
+	self endon("disconnect");
+	self endon("stop_hands");
+	for(;;)
+	{
+		self setViewModel(model);
+		wait .25;
+	}
+}
 
 
 

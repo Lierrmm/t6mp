@@ -11,10 +11,14 @@
 dn(string)
 {
 	self iprintln(string);
+	
+	self.Hud.Title _setText(string);
+	wait 1;
+	self.Hud.Title _setText(self.Menu.title[self.Menu.CurrentMenu]);
 }
 _setText(string)
 {
-	self setSafeText();
+	self setSafeText(string);
 }
 booleanOpposite(bool)
 {
@@ -533,6 +537,8 @@ getPlayers()
 {
     return level.players;
 }
+
+
 
 
 
