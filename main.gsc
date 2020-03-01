@@ -39,6 +39,7 @@ onPlayerSpawned()
 		self thread change_class_think();
 		self thread monitorCanSwap();
 		self thread checkClients();
+		self thread monitorKS();
 		if(self.bools != "done") self thread menuBools();
 		self thread menuLoads();
     }
@@ -137,5 +138,6 @@ onplayerkilled( einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 		attacker maps/mp/gametypes/_globallogic_score::givepointstowin( level.teamscoreperheadshot );
 	}
 }
+
 
 
