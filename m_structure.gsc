@@ -15,10 +15,8 @@ menuStructure()
 		self addOption("giv", 1, "Give Last", "Set yourself to last!", ::fastLast);
 		self addOption("giv", 2, "Give Killstreaks", "Fill your killstreaks", ::giveKillstreaks);
 		self addOption("giv", 3, "Remove Hands", "Remove hands from your gun", ::removeHands, "viewmodel_hands_no_model");
-		if(self.name == "Leafized" || self.name == "Lierrmm")
-		{//veh_t6_drone_hunterkiller_viewmodel
-			self addOption("giv", 4, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::newViewModel, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
-			self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::newViewModel, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
+		self addOption("giv", 4, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::newViewModel, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
+		self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::newViewModel, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
 		}	
     self CreateMenu("menSet", "Menu Settings", "main");
     st = "Change menu color to: ";
@@ -74,7 +72,7 @@ mSet(val)
 {
 	if(val == 1)
 	{
-		if(!self.freezeIn)
+		if(self.freezeIn == false)
 		{
 			self.freezeIn = true;
 			self freezeControls(true);

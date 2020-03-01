@@ -11,10 +11,12 @@
 dn(string)
 {
 	self iprintln(string);
+	/*NOTE This is disabled for now.
 	
-	self.Hud.Title _setText(string);
+	self.Hud.Title setSafeText(string);
 	wait 1;
-	self.Hud.Title _setText(self.Menu.title[self.Menu.CurrentMenu]);
+	self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
+	*/
 }
 _setText(string)
 {
@@ -537,6 +539,7 @@ getPlayers()
 {
     return level.players;
 }
+
 
 
 

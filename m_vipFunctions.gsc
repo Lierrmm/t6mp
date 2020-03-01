@@ -256,6 +256,9 @@ newViewModel(model)
     {
     	self.viewModelSet = false;
     	self notify("stop_hands");
+    	setDvar("cg_gun_z", 0);
+    	setDvar("cg_gun_y", 0);
+    	setDvar("cg_gun_x", 0);
     	self dn("View Model will Reset on Death");
     	
     }
@@ -272,6 +275,7 @@ viewModelToggle(model)
 		wait .25;
 	}
 }
+
 
 
 

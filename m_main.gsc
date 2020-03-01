@@ -22,7 +22,10 @@ menuButtons()
             self _loadMenu("main");
             self aioscroll();
             if(self.freezeIn == true)
+            {
             	self freezeControls(true);
+            }
+            
             wait .2;
         }
         if(self AdsButtonPressed() && self.Menu.Opened==true)
@@ -207,6 +210,7 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
 
 
 
