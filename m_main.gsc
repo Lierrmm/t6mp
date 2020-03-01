@@ -5,11 +5,6 @@ initMenu()
     self.Menu.Opened = false;
     self thread menuStructure();
     self thread menuButtons();
-		if(getDvar(self getXUID() + "m_inst") != "off")
-	{
-    	self.Hud.insBackground = createText("default", 1.2, "RIGHT", "TOPRIGHT", 40,0, 1, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
-		self.Hud.insShader = createRectangle("RIGHT", "TOPRIGHT", 50,2 ,280, 20, (0,0,0), .6, 0, "white");
-	}        
 }
 
 
@@ -75,7 +70,7 @@ menuButtons()
             }
             wait .3;
         }
-        wait 0.05;
+        wait 0.15;
     }
     wait 0.05;
 }
@@ -91,7 +86,7 @@ _loadMenu(menu)
     self destroyMenuText();
     self.Menu.CurrentMenu = menu;
     self.Scroller = 0;
-    self.Hud.Title _setText(self.Menu.title[self.Menu.CurrentMenu]);
+    self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
     self createMenuText();
     self aioscroll();
     self.Hud.Desc _setText(self.Menu.Desc[self.Menu.CurrentMenu][self.Scroller]);
@@ -102,6 +97,7 @@ createMenuText()
     {
         self.Hud.Text[i] = createText("default",1.5,"CENTER","TOP",0,175+(18*i),0,(1,1,1),1,(0,0,0),0,self.Menu.Text[self.Menu.CurrentMenu][i]);
         self.Hud.Text[i].foreground = true;
+        self.Hud.Text[i].archived = false;
         self addGlowText(i);
     }
 }
@@ -174,7 +170,7 @@ mColor(name, value)
     self aioscroll();
 }
 
-CreateMenu(menu,title,description,parent)
+CreateMenu(menu,title,parent)
 {
     self.Menu.title[menu] = title;
     self.Menu.parent[menu] = parent;
@@ -211,6 +207,8 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
+
 
 
 
