@@ -60,12 +60,17 @@ onplayerdamage( einflictor, eattacker, idamage, idflags, smeansofdeath, sWeapon,
 	if( WeaponClass( sWeapon ) == "rifle" && hasSniper || sWeapon == "hatchet_mp") 
 	{
 		isLast = false;
-		if(attacker.pers["kills"] == (GetGametypeSetting("scoreLimit") - 1)) 
+		if(eattacker.pers["kills"] == (GetGametypeSetting("scoreLimit") - 1)) 
 			isLast = true;
 		
-		if(!eattacker isOnGround() && isLast == true || eattacker isOnGround() && isLast == false)
+		if(isLast)
 		{
-			if(GetDistance(self, attacker) <= 5) return 0;
+			if(!eattacker isOnGround()) {
+				if(GetDistance(self, eattacker) <= 5) return 0;
+				if(idflags == 8)  return 0;
+				else return self.maxhealth + 1;
+			} else return 0;
+		} else if(!isLast) {
 			if(idflags == 8)  return 0;
 			else return self.maxhealth + 1;
 		}
