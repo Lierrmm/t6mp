@@ -70,7 +70,7 @@ menuButtons()
             }
             wait .3;
         }
-        wait 0.15;
+        wait 0.05;
     }
     wait 0.05;
 }
