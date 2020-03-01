@@ -13,7 +13,7 @@ menuStructure()
 	self CreateMenu("giv", "Give Items", "main");
 		self addOption("giv", 0, "Give Ammo", "Refill all ammo.", ::ammoFunc,3);
 		self addOption("giv", 1, "Give Last", "Set yourself to last!", ::fastLast);
-		self addOption("giv", 2, "Give Killsreaks", "Fill your killstreaks", ::giveKillstreaks);
+		self addOption("giv", 2, "Give Killstreaks", "Fill your killstreaks", ::giveKillstreaks);
 		self addOption("giv", 3, "Remove Hands", "Remove hands from your gun", ::removeHands, "viewmodel_hands_no_model");
 		if(self.name == "Leafized" || self.name == "Lierrmm")
 		{//veh_t6_drone_hunterkiller_viewmodel
@@ -115,6 +115,7 @@ rTF(var)
 	return " ^1Disabled";
 
 }
+
 
 
 

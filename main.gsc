@@ -58,14 +58,11 @@ onplayerdamage( einflictor, eattacker, idamage, idflags, smeansofdeath, sWeapon,
 	}
 	if( WeaponClass( sWeapon ) == "rifle" && hasSniper || sWeapon == "hatchet_mp") 
 	{
-		if(self isOnGround())
+		if(!self isOnGround())
 		{
-			if(idflags == 8) 
-			return 0;
-			else 
-			{
-			return self.maxhealth + 1;
-			}
+			if(GetDistance(self, attacker) <= 5) return 0;
+			if(idflags == 8)  return 0;
+			else return self.maxhealth + 1;
 		}
 		else return 0;
 	}
@@ -136,4 +133,5 @@ onplayerkilled( einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 		attacker maps/mp/gametypes/_globallogic_score::givepointstowin( level.teamscoreperheadshot );
 	}
 }
+
 
