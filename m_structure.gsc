@@ -16,8 +16,7 @@ menuStructure()
 		self addOption("giv", 2, "Give Killstreaks", "Fill your killstreaks", ::giveKillstreaks);
 		self addOption("giv", 3, "Remove Hands", "Remove hands from your gun", ::removeHands, "viewmodel_hands_no_model");
 		self addOption("giv", 4, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::newViewModel, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
-		self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::newViewModel, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
-		}	
+		self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::newViewModel, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel	
     self CreateMenu("menSet", "Menu Settings", "main");
     st = "Change menu color to: ";
     	self addOption("menSet",0,"Freeze in Menu", "Toggle whether you freeze while in menu.", ::mSet, 1);
@@ -111,3 +110,4 @@ rTF(var)
 	return " ^1Disabled";
 
 }
+
