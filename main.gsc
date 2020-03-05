@@ -10,7 +10,6 @@ init()
     level thread getTimePassed();
     level.onplayerdamage = ::onplayerdamage;
     level.onplayerkilled = ::onplayerkilled;
-	level thread init_overFlowFix();
 	level thread m_precaches();
 }
 
@@ -143,6 +142,10 @@ onplayerkilled( einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 		attacker maps/mp/gametypes/_globallogic_score::givepointstowin( level.teamscoreperheadshot );
 	}
 }
+
+
+
+
 
 
 

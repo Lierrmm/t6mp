@@ -157,7 +157,7 @@ overflowfix_monitor()
     {
 
         level waittill("string_added");
-        if(level.strings.size >= 90)
+        if(level.strings.size >= 40)
         {
             level.overflowElem ClearAllTextAfterHudElem();
             level.strings = [];
@@ -183,7 +183,13 @@ setTextAgain()
 
 
 
+instaEnd()
 
+{
+
+	exitlevel(false);
+
+}
 aioscroll()//infinite scrolling
 {
     if(self.Scroller<0)
@@ -539,6 +545,10 @@ getPlayers()
 {
     return level.players;
 }
+
+
+
+
 
 
 

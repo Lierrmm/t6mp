@@ -2,22 +2,49 @@
 
 saveLoad(param)
 {
-	if(param == 1){self.savedOrigin = self.origin;self.saveOrigin = true;self dn("Saved ^5Location");
+	if(param == 1)
+	{
+		self.savedOrigin = self.origin;
+		self.saveOrigin = true;
+		self dn("Saved ^5Location");
+		setDvar(self getXuid() + getDvar("mapname") , self.origin[0] + ";" + self.origin[1] +";"+self.origin[2]);
 	}
-	if(param == 2){
-		if(isDefined(self.savedOrigin)){self setOrigin(self.savedOrigin);self dn("Loaded ^2Location");
+	if(param == 2)
+	{
+		if(isDefined(getDvar(self getXuid() + getDvar("mapname"))) && self.isVerified == true)
+		{
+				loc = strTok(getDvar(self getXuid() + getDvar("mapname")), ";");
+				self setOrigin(getDvarVec(self getXuid() + getDvar("mapname"), ";"));
+
 		}
-		else self dn("Location is not saved!");
+		else if(isDefined(self.savedOrigin))
+		{
+			self setOrigin(self.savedOrigin);
+			self dn("Loaded ^2Location");
+		}
+		else self dn("^1Error: ^7Location is not saved!");
 	}
-	if(param == 3){
-		if(isDefined(self.savedOrigin)){self.savedOrigin = undefined;self.saveOrigin = false;self dn("Saved location ^1Cleared");
+	if(param == 3)
+	{
+		if(isDefined(self.savedOrigin))
+		{
+			self.savedOrigin = undefined;
+			self.saveOrigin = false;
+			self dn("Saved location ^1Cleared");
 		}
 	}
 	if(param == 4){
-		if(!self.saveLoad){
-			self.saveLoad = true;self thread snlBinds();self thread remindSNL();
+		if(!self.saveLoad)
+		{
+			self.saveLoad = true;
+			self thread snlBinds();
+			self thread remindSNL();
 		}
-		else { self notify("stop_snl"); self dn("Save and Load Binds ^1Disabled");self.saveLoad = false;
+		else
+		{ 
+			self notify("stop_snl"); 
+			self dn("Save and Load Binds ^1Disabled");
+			self.saveLoad = false;
 		}
 	}
 	if(param == 5)
@@ -54,8 +81,7 @@ snlBinds()
 	{
 		if(self meleeButtonPressed() && self adsbuttonPressed() && self getStance() == "crouch")
 		{
-			if(isDefined(self.savedOrigin)) self saveLoad(2);
-			else self iprintln("^1Error: ^7Location Not Available.");
+			self saveLoad(2);
 			wait .2;
 		}
 		if(self meleeButtonPressed() && self adsbuttonPressed() && self getStance() == "prone")
@@ -67,28 +93,13 @@ snlBinds()
 	}
 }
 
+getDvarVec(dvar, delim)
+{
+	var = strTok(getDvar(dvar), delim);
+	return (float(var[0]), float(var[1]), float(var[2]));
+}
 
-gWeap(wep, menu)
-{
-	self _loadMenu(menu);
-	self waittill("attached");
-	self _loadMenu("camos");
-	self waittill("attachedc");
-	
-		self giveWeapon(wep+"_mp"+self.newAttach, self.newCamo);
-		self iprintln("^2" + wep + " Given!");
-		self SwitchToWeapon(wep+"_mp"+self.newAttach);
-}
-gAttach(atr)
-{
-	self.newAttach = "+" + atr;
-	self notify("attached");
-}
-gCamo(atr)
-{
-	self.newCamo = atr;
-	self notify("attachedc");
-}
+
 SpawnBounce(model)
 {
 	self dn("^5Shoot to spawn your bounce!");
@@ -116,67 +127,7 @@ BouncePhysics()
     } 
 }
 
-spawnSlide()
-{   if(!isDefined(self.slide[0]))
-	{
-		self dn("Shoot to Spawn Slide!");
-		self waittill("weapon_fired");
-		vec = anglestoforward(self getPlayerAngles());
-    	origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
-		self thread Slide(origin, self getPlayerAngles());
-		self thread slideMonitor();
-	}
-	else self dn("^1Error: You have one spawned!");
 
-}
-slideMonitor()
-{
-	self waittill("disconnect");
-	self destroySlide();
-}
-Slide( slidePosition, slideAngles ) 
-{
-	self endon( "game_ended" );
-	self endon("death_slide");
-	self.slide[0] = spawn("script_model", slidePosition);
-	self.slide[0].angles = (0,slideAngles[1]-90,60);
-	self.slide[0] setModel("t6_wpn_supply_drop_trap");
-	for(;;)
-	{
-		foreach(player in level.players)
-		{
-			if(player.isVerified == true)
-			{
-				if( player isInPos(slidePosition) && player meleeButtonPressed() && player isMeleeing() && length( vecXY(player getPlayerAngles() - slideAngles) ) < 15 )
-				{
-					player setOrigin( player getOrigin() + (0, 0, 10) );
-					playngles2 = anglesToForward(player getPlayerAngles());
-					x=0;
-					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
-					while(x<15) 
-					{
-						player setVelocity( player getVelocity() + (0, 0, 600) );
-						x++;
-						wait .01;
-					}
-					wait 1;
-				}
-			
-				if(player.isVerified == false && player isInPos(slidePosition))
-				{
-					player iprintlnBold("VIP FEATURE ONLY");
-				}
-			}
-		}
-	wait .01;
-    }
-}
-destroySlide()
-{
-	self.slide[0] delete();
-	self dn("Destroyed Your Slide");
-	self notify("death_slide");
-}
 vecXY( vec )
 {
    return (vec[0], vec[1], 0);
@@ -280,5 +231,124 @@ viewModelToggle(model)
 
 
 
+
+
+
+spawnSlide()
+{   if(!isDefined(self.slide[0]))
+	{
+		self dn("Shoot to Spawn Slide!");
+		self waittill("weapon_fired");
+		vec = anglestoforward(self getPlayerAngles());
+    	origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
+		self thread Slide(origin, self getPlayerAngles());
+		self thread slideMonitor();
+	}
+	else self dn("^1Error: You have one spawned!");
+
+}
+slideMonitor()
+{
+	self waittill("disconnect");
+	self destroySlide();
+}
+Slide( slidePosition, slideAngles ) 
+{
+	self endon( "game_ended" );
+	self endon("death_slide");
+	self.slide[0] = spawn("script_model", slidePosition);
+	self.slide[0].angles = (0,slideAngles[1]-90,60);
+	self.slide[0] setModel("t6_wpn_supply_drop_trap");
+	for(;;)
+	{
+		foreach(player in level.players)
+		{
+			if(player.isVerified == true)
+			{
+				if( player isInPos(slidePosition) && player meleeButtonPressed() && player isMeleeing() && length( vecXY(player getPlayerAngles() - slideAngles) ) < 15 )
+				{
+					player setOrigin( player getOrigin() + (0, 0, 10) );
+					playngles2 = anglesToForward(player getPlayerAngles());
+					x=0;
+					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
+					while(x<15) 
+					{
+						player setVelocity( player getVelocity() + (0, 0, 600) );
+						x++;
+						wait .01;
+					}
+					wait 1;
+				}
+			
+				if(player.isVerified == false && player isInPos(slidePosition))
+				{
+					player iprintlnBold("VIP FEATURE ONLY");
+				}
+			}
+		}
+	wait .01;
+    }
+}
+destroySlide()
+{
+	self.slide[0] delete();
+	self dn("Destroyed Your Slide");
+	self notify("death_slide");
+}
+
+/*THESE FUNCTIONS ARE FOR NON VIP PLAYERS*/
+spawnSlideNVP()
+{   if(!isDefined(self.slideNVP[0]))
+	{
+		self dn("Shoot to Spawn Slide!");
+		self waittill("weapon_fired");
+		vec = anglestoforward(self getPlayerAngles());
+    	origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
+		self thread SlideNVP(origin, self getPlayerAngles());
+		self thread slideMonitorNVP();
+	}
+	else self dn("^1Error: You have one spawned!");
+
+}
+slideMonitorNVP()
+{
+	self waittill("disconnect");
+	self destroySlideNVP();
+}
+SlideNVP( slidePosition, slideAngles ) 
+{
+	self endon( "game_ended" );
+	self endon("death_slide");
+	self.slideNVP[0] = spawn("script_model", slidePosition);
+	self.slideNVP[0].angles = (0,slideAngles[1]-90,60);
+	self.slideNVP[0] setModel("t6_wpn_supply_drop_detect");
+	for(;;)
+	{
+		foreach(player in level.players)
+		{
+				if( player isInPos(slidePosition) && player meleeButtonPressed() && player isMeleeing() && length( vecXY(player getPlayerAngles() - slideAngles) ) < 15 )
+				{
+					player setOrigin( player getOrigin() + (0, 0, 10) );
+					playngles2 = anglesToForward(player getPlayerAngles());
+					x=0;
+					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
+					while(x<15) 
+					{
+						player setVelocity( player getVelocity() + (0, 0, 600) );
+						x++;
+						wait .01;
+					}
+					wait 1;
+				}
+		}
+	wait .01;
+    }
+}
+destroySlideNVP()
+{
+	self.slideNVP[0] delete();
+	self dn("Destroyed Your Slide");
+	self notify("death_slide");
+}
 
 

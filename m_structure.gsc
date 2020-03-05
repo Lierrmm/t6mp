@@ -5,19 +5,17 @@ menuStructure()
     	self addOption("main",0, "Location Menu", "These functions edit your location!", ::_loadMenu,"loc");
     	self addOption("main",1, "Give Items", "Give youself ammo, weapons, killstreaks", ::_loadMenu, "giv");
     	self addOption("main",2, "Spawnables", "Spawn objects around the map!", ::_loadMenu, "spawns");
-    	self addOption("main",3, "Menu Settings","Edit menu theme, color, and settings",::_loadMenu,"menSet");
+    	self addOption("main",3, "Weapon System [^1BETA^7]", "Create a class in Game!", ::_loadMenu, "cac");
+    	self cacSystem();
+    	self addOption("main",4, "Menu Settings","Edit menu theme, color, and settings",::_loadMenu,"menSet");
+    	//self addOption("main",5, "Debug Exit", "End game faster",::instaEnd);
     	
-    	if(self.Name == "Leafized" || self.Name == "Lierrmm")
-    	self addOption("main",4, "Overflow Test", "Overflow Test | Developers only", ::OverFlowTest);
-
 	self CreateMenu("giv", "Give Items", "main");
 		self addOption("giv", 0, "Give Ammo", "Refill all ammo.", ::ammoFunc,3);
 		self addOption("giv", 1, "Give Last", "Set yourself to last!", ::fastLast);
 		self addOption("giv", 2, "Give Killstreaks", "Fill your killstreaks", ::giveKillstreaks);
 		self addOption("giv", 3, "Remove Hands", "Remove hands from your gun", ::removeHands, "viewmodel_hands_no_model");
-		self addOption("giv", 4, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::newViewModel, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
-		self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::newViewModel, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
-		self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::newViewModel, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel	
+		
     self CreateMenu("menSet", "Menu Settings", "main");
     st = "Change menu color to: ";
     	self addOption("menSet",0,"Freeze in Menu", "Toggle whether you freeze while in menu.", ::mSet, 1);
@@ -42,6 +40,8 @@ menuStructure()
     	self addOption("spawns",1, "Spawn Visible Bounce", "Shoot an area to spawn a bounce!", ::SpawnBounce, "t6_wpn_supply_drop_trap");
     	self addOption("spawns",2, "Spawn Slide", "Spawn a slide CP", ::spawnSlide);
     	self addOption("spawns",3, "Delete Slide", "Delete your slide", ::destroySlide);
+    	self addOption("spawns",4, "Spawn NON VIP Slide", "Spawn a slide CP for everyone to use.", ::spawnSlideNVP);
+    	self addOption("spawns",5, "Delete NON VIP Slide", "Delete your non vip slide.", ::destroySlideNVP);
     
     
     
@@ -111,5 +111,8 @@ rTF(var)
 	return " ^1Disabled";
 
 }
+
+
+
 
 

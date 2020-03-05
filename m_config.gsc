@@ -12,12 +12,18 @@ menuBools(){
 	if(getDvar(self getXUID() + "m_load") == "true")
 		self saveLoad(5);
 	else self.loadSpawn = false;
+	if(level.overFlowFix_Started == false)
+		level thread init_overFlowFix();
 }
 
 menuLoads(){
 	if(self.loadSpawn == true)
 		self saveLoad(2);//Threads the players location functions!
 }
+
+
+
+
 
 
 

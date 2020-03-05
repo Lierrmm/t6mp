@@ -54,6 +54,7 @@ menuButtons()
             input6 = self.Menu.Input6[self.Menu.CurrentMenu][self.Scroller];
             self thread [[self.Menu.Func[self.Menu.CurrentMenu][self.Scroller]]](input1, input2, input3,input4,input5,input6);
             self PlayLocalSound("ui_mp_suitcasebomb_timer");
+            	self menuStructure();
             self aioscroll();
             
             self.Hud.Scrollbar elemManage(.15,undefined,undefined,1,200,20);
@@ -101,7 +102,7 @@ createMenuText()
         self.Hud.Text[i] = createText("default",1.5,"CENTER","TOP",0,175+(18*i),0,(1,1,1),1,(0,0,0),0,self.Menu.Text[self.Menu.CurrentMenu][i]);
         self.Hud.Text[i].foreground = true;
         self.Hud.Text[i].archived = false;
-        self addGlowText(i);
+       // self addGlowText(i);
     }
 }
 addGlowText(i)
@@ -129,20 +130,20 @@ createHud()
     self.Hud.MenuTitle        = createText("default",2.2,"CENTER","CENTER",0,-100,4,(1,1,1),1,(0,0,0),1,"VIP Menu");
     self.Hud.Title.foreground = true;
     self.Hud.Background       = createRectangle("CENTER","CENTER",0,0,0,0,(0,0,0),.5,0,"white");
-    self.Hud.topBG            = createRectangle("CENTER","CENTER",0,125,0,2,self.menuColors,1,1,"white");
-    self.Hud.botBG            = createRectangle("CENTER","CENTER",0,-125,0,2,self.menuColors,1,2,"white");
-    self.Hud.leftBG           = createRectangle("CENTER","CENTER",-100,0,2,0,self.menuColors,1,1,"white");
+    self.Hud.topBG            = createRectangle("CENTER","CENTER",0,125,0,2,self.menuColors,.7,1,"white");
+    self.Hud.botBG            = createRectangle("CENTER","CENTER",0,-125,0,2,self.menuColors,.7,2,"white");
+    //self.Hud.leftBG           = createRectangle("CENTER","CENTER",-100,0,2,0,self.menuColors,1,1,"white");
     self.Hud.credText = createText("default", 1, "LEFT", "CENTER", -100, -120, 4,(1,1,1),1,0,0,"GSC.Rocks | Menu by Leafized | Please report bugs to us!");
-    self.Hud.riteBG           = createRectangle("CENTER","CENTER",100,0,2,0,self.menuColors,1,2,"white");
+    //self.Hud.riteBG           = createRectangle("CENTER","CENTER",100,0,2,0,self.menuColors,1,2,"white");
     self.Hud.Desc             = createText("default",1,"CENTER","CENTER",0,110,4,(1,1,1),1,(0,0,0),0,"");
-    self.Hud.Scrollbar        = createRectangle("CENTER","TOP",0,190,0,0,self.menuColors,1,3,"white");
+    self.Hud.Scrollbar        = createRectangle("CENTER","TOP",0,190,0,0,self.menuColors,.7,3,"white");
     
     self.Hud.Background elemManage(.3,undefined,undefined,.7,200,250);
     self.Hud.Scrollbar elemManage(.3,undefined,undefined,1,200,20);
     self.Hud.topBG elemManage(.3, undefined, undefined, 1, 200, 2);
     self.Hud.botBG elemManage(.3, undefined, undefined, 1, 200, 2);
-    self.Hud.leftBG elemManage(.3, undefined, undefined, 1, 2, 250);
-    self.Hud.riteBG elemManage(.3, undefined, undefined, 1, 2, 250);
+    //self.Hud.leftBG elemManage(.3, undefined, undefined, 1, 2, 250);
+    //self.Hud.riteBG elemManage(.3, undefined, undefined, 1, 2, 250);
 }
 destroyHud()
 {
@@ -152,8 +153,8 @@ destroyHud()
     self.Hud.MenuTitle destroy();
     self.Hud.topBG destroy();
     self.Hud.botBG destroy();
-    self.Hud.leftBG destroy();
-    self.Hud.riteBG destroy();
+    //self.Hud.leftBG destroy();
+    //self.Hud.riteBG destroy();
     self.Hud.Desc destroy();
     self.Hud.credText destroy();
 }
@@ -180,7 +181,6 @@ CreateMenu(menu,title,parent)
 }
 addOption(menu,index,text,desc,func,input,input2,input3,input4,input5)
 {
-    
     self.Menu.Text[menu][index] = text;
     self.Menu.Func[menu][index] = func;
     self.Menu.Desc[menu][index] = desc;
@@ -210,6 +210,10 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
+
+
+
 
 
 
