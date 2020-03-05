@@ -38,12 +38,12 @@ dropPlayer(type,reason) {
 	level thread showDelayText(text,1);
 	logPrint("say;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;64;GSCAntiCheat;!"+ type +" " + self GetEntityNumber() + " " + reason +"\n");
 	wait 3;
-	if(!isDefined(self)) return;	
+	if(!isDefined(self)) return;
 	if(type == "ban")
 		ban(self getEntityNumber());
-	if(type == "kick")	
+	if(type == "kick")
 		kick(self getEntityNumber());
-	wait 999; 
+	wait 999;
 }
 
 showDelayText(text,delay) {
@@ -102,10 +102,10 @@ checkGun(weap)
 
 advertisements() {
 	self endon("disconnect");
-    msgs = strTok("[{+actionslot 2}] for ^5CanSwap|Discord: ^3www.gsc.rocks|VIP Menu by ^2Leafized|^5Make menu suggestions!|Prone + [{+smoke}] to give Killstreaks!", "|"); 
+    msgs = strTok("[{+actionslot 2}] for ^5CanSwap|Discord: ^3www.gsc.rocks|VIP Menu by ^2Leafized|^5Make menu suggestions!", "|");
 	for(;;) {
 		self iprintln(msgs[randomInt(msgs.size)]);
-		wait 30;
+		wait 59;
 	}
 	wait 10;
 }
@@ -141,7 +141,7 @@ updateMatchBonus()
 gWeap(wep)
 {
     self iprintln(self getCurrentWeapon());
-    self _loadMenu("assault"); 
+    self _loadMenu("assault");
     self waittill("attached");
     self _loadMenu("menu11");
     self iPrintln("^1DOES NOT WORK WITH RAINBOW OR DISCO");
@@ -180,21 +180,3 @@ gWeapCamo(camo_number)
         self switchtoweapon(weap);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

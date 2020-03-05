@@ -14,16 +14,7 @@ NameCheck() {
 		oldname = self.name; wait 5;
 		if(oldname != self.name && self isNameUsed(self.name)) namechanges += 1;
 		else namechanges -= 0.1;
-		if(namechanges < 0) namechanges = 0;			
+		if(namechanges < 0) namechanges = 0;
 		if(namechanges > 3) self thread dropPlayer("kick", "Namechanger (Autokick)");
 	}
 }
-
-
-
-
-
-
-
-
-

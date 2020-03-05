@@ -11,16 +11,10 @@
 dn(string)
 {
 	self iprintln(string);
-	/*NOTE This is disabled for now.
-	
-	self.Hud.Title setSafeText(string);
-	wait 1;
-	self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
-	*/
 }
 _setText(string)
 {
-	self setSafeText(string);
+	self setSafeText();
 }
 booleanOpposite(bool)
 {
@@ -36,9 +30,9 @@ elemManage(time, x, y, a, w, h, txt)
     if( isDefined(time) && isDefined(x) && isDefined(y) )
     {
         self moveOverTime( time );
-        if( isDefined( x ) ) 
+        if( isDefined( x ) )
         self.x = x;
-        if( isDefined( y ) ) 
+        if( isDefined( y ) )
         self.y = y;
     }
     if(isDefined(time) && isDefined(a))
@@ -77,7 +71,7 @@ OverFlowTest()
        self.Hud.Title setSafeText("String Set ^4B");
        wait .05;
        i++;
-         
+
     }
 }
 
@@ -100,18 +94,12 @@ init_overFlowFix()
 {
     level.overFlowFix_Started = true;
     level.strings = [];
-    
+
     level.overflowElem = createServerFontString("default",1.5);
-    level.overflowElem setText("overflow");   
+    level.overflowElem setText("overflow");
     level.overflowElem.alpha = 0;
-    
+
     level thread overflowfix_monitor();
-}
-m_precaches()
-{
-    precacheModel("viewmodel_hands_no_model");
-    precacheModel("veh_t6_drone_hunterkiller_viewmodel");
-    precacheModel("t6_wpn_smg_pdw57_view");
 }
 fix_string()
 {
@@ -125,7 +113,7 @@ fix_string()
             self setSafeText(self.string);
             foreach(player in level.players)
             player iprintln("OVERFLOW FIXED");
-          
+
         }
     }
 }
@@ -148,10 +136,10 @@ inArray(ar,string)
             return true;
         }
     }
-    return false;      
+    return false;
 }
 overflowfix_monitor()
-{  
+{
     level endon("game_ended");
     for(;;)
     {
@@ -167,7 +155,7 @@ overflowfix_monitor()
                 player thread setTextAgain();
             }
         }
-        wait 0.01; 
+        wait 0.01;
     }
 }
 setTextAgain()
@@ -212,7 +200,7 @@ aioscroll()//infinite scrolling
             else
             {
                 self.Hud.Text[i] setSafeText("");
-            }      
+            }
         }
         self.Hud.Scrollbar.y = 175+(18*self.Scroller);
     }
@@ -225,7 +213,7 @@ aioscroll()//infinite scrolling
             {
                 if(isDefined(self.Menu.Text[self.Menu.CurrentMenu][i]))
                 {
-                    self.Hud.Text[optnum] setSafeText(self.Menu.Text[self.Menu.CurrentMenu][i]);       
+                    self.Hud.Text[optnum] setSafeText(self.Menu.Text[self.Menu.CurrentMenu][i]);
                 }
                 else
                 {
@@ -245,8 +233,8 @@ aioscroll()//infinite scrolling
        }
     }
     self.Hud.Desc setText(self.Menu.Desc[self.Menu.CurrentMenu][self.Scroller]);
-} 
-    
+}
+
 createText(font, fontscale, align, relative, x, y, sort, color, alpha, glowColor, glowAlpha, text)
 {
     textElem = CreateFontString( font, fontscale );
@@ -545,26 +533,3 @@ getPlayers()
 {
     return level.players;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

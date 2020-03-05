@@ -13,7 +13,7 @@ menuButtons()
     self endon("disconnect");
     for(;;)
     {
-    	
+
         if(self AdsButtonPressed() && self MeleeButtonPressed() && self getStance() == "stand" && self.Menu.Opened==false && self isOnGround())
         {
             self.Menu.Opened = true;
@@ -22,10 +22,7 @@ menuButtons()
             self _loadMenu("main");
             self aioscroll();
             if(self.freezeIn == true)
-            {
             	self freezeControls(true);
-            }
-            
             wait .2;
         }
         if(self AdsButtonPressed() && self.Menu.Opened==true)
@@ -45,7 +42,7 @@ menuButtons()
             self.Hud.Desc _setText(self.Menu.Desc[self.Menu.CurrentMenu][self.Scroller]);
             self.Hud.Scrollbar elemManage(.15,undefined,undefined,1,180,16);
             wait .3;
-            
+
             input1 = self.Menu.Input[self.Menu.CurrentMenu][self.Scroller];
             input2 = self.Menu.Input2[self.Menu.CurrentMenu][self.Scroller];
             input3 = self.Menu.Input3[self.Menu.CurrentMenu][self.Scroller];
@@ -56,7 +53,7 @@ menuButtons()
             self PlayLocalSound("ui_mp_suitcasebomb_timer");
             	self menuStructure();
             self aioscroll();
-            
+
             self.Hud.Scrollbar elemManage(.15,undefined,undefined,1,200,20);
         }
         if(self MeleeButtonPressed() && self.Menu.Opened==true)
@@ -81,7 +78,7 @@ menuButtons()
 scrollAnim()
 {
             self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,16);
-            wait .11;                                             
+            wait .11;
             self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,20);
 }
 
@@ -90,7 +87,7 @@ _loadMenu(menu)
     self destroyMenuText();
     self.Menu.CurrentMenu = menu;
     self.Scroller = 0;
-    self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
+    self.Hud.Title _setText(self.Menu.title[self.Menu.CurrentMenu]);
     self createMenuText();
     self aioscroll();
     self.Hud.Desc _setText(self.Menu.Desc[self.Menu.CurrentMenu][self.Scroller]);
@@ -103,6 +100,8 @@ createMenuText()
         self.Hud.Text[i].foreground = true;
         self.Hud.Text[i].archived = false;
        // self addGlowText(i);
+        self addGlowText(i);
+
     }
 }
 addGlowText(i)
@@ -137,7 +136,7 @@ createHud()
     //self.Hud.riteBG           = createRectangle("CENTER","CENTER",100,0,2,0,self.menuColors,1,2,"white");
     self.Hud.Desc             = createText("default",1,"CENTER","CENTER",0,110,4,(1,1,1),1,(0,0,0),0,"");
     self.Hud.Scrollbar        = createRectangle("CENTER","TOP",0,190,0,0,self.menuColors,.7,3,"white");
-    
+
     self.Hud.Background elemManage(.3,undefined,undefined,.7,200,250);
     self.Hud.Scrollbar elemManage(.3,undefined,undefined,1,200,20);
     self.Hud.topBG elemManage(.3, undefined, undefined, 1, 200, 2);
@@ -174,7 +173,7 @@ mColor(name, value)
     self aioscroll();
 }
 
-CreateMenu(menu,title,parent)
+CreateMenu(menu,title,description,parent)
 {
     self.Menu.title[menu] = title;
     self.Menu.parent[menu] = parent;
@@ -194,7 +193,7 @@ addOption(menu,index,text,desc,func,input,input2,input3,input4,input5)
 }
 addBool(menu,index,text,desc,bool,func,input,input2,input3,input4,input5)
 {
-    
+
     self.Menu.Text[menu][index] = text;
     self.Menu.Func[menu][index] = func;
     self.Menu.Desc[menu][index] = desc;
@@ -210,27 +209,3 @@ Test()
 {
     self iprintln("^1TEST");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -41,8 +41,8 @@ saveLoad(param)
 			self thread remindSNL();
 		}
 		else
-		{ 
-			self notify("stop_snl"); 
+		{
+			self notify("stop_snl");
 			self dn("Save and Load Binds ^1Disabled");
 			self.saveLoad = false;
 		}
@@ -51,14 +51,14 @@ saveLoad(param)
 	{
 		if(!self.loadSpawn)
 		{
-			self.loadSpawn = true; 
+			self.loadSpawn = true;
 			setDvar(self getXUID() + "m_load", "true");
 			self dn("Load on Spawn ^2Enabled");
 		}
 		else
 		{
 			setDvar(self getXUID() + "m_load", "false");
-			self.loadSpawn = false; 
+			self.loadSpawn = false;
 			self dn("Load on Spawn ^1Disabled");
 		}
 	}
@@ -83,13 +83,16 @@ snlBinds()
 		{
 			self saveLoad(2);
 			wait .2;
+			if(isDefined(self.savedOrigin)) self saveLoad(2);
+			else self iprintln("^1Error: ^7Location Not Available.");
+			wait .1;
 		}
 		if(self meleeButtonPressed() && self adsbuttonPressed() && self getStance() == "prone")
 		{
 			self saveLoad(1);
-			wait .2;
+			wait .1;
 		}
-		wait .1;
+		wait .25;
 	}
 }
 
@@ -118,21 +121,76 @@ BouncePhysics()
     {
         foreach(player in level.players)
           {
-              if (player GetVelocity()[2] < 100 && distance(player.origin, self.origin) < 50) 
+              if (player GetVelocity()[2] < 100 && distance(player.origin, self.origin) < 50)
               {
-                  player SetVelocity(player GetVelocity()[2]*(0,0,-50));
+                  player SetVelocity(player GetVelocity()[2]*(0,0,-400));
               }
           }
         wait 0.01;
-    } 
+    }
 }
 
+spawnSlide()
+{   if(!isDefined(self.slide[0]))
+	{
+		self dn("Shoot to Spawn Slide!");
+		self waittill("weapon_fired");
+		vec = anglestoforward(self getPlayerAngles());
+    	origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
+		self thread Slide(origin, self getPlayerAngles());
+	}
+	else self dn("^1Error: You have one spawned!");
+
+}
+Slide( slidePosition, slideAngles )
+{
+	self endon( "game_ended" );
+	self endon("death_slide");
+	self.slide[0] = spawn("script_model", slidePosition);
+	self.slide[0].angles = (0,slideAngles[1]-90,60);
+	self.slide[0] setModel("t6_wpn_supply_drop_trap");
+	for(;;)
+	{
+		foreach(player in level.players)
+		{
+			if(player.isVerified == true)
+			{
+				if( player isInPos(slidePosition) && player meleeButtonPressed() && player isMeleeing() && length( vecXY(player getPlayerAngles() - slideAngles) ) < 15 )
+				{
+					player setOrigin( player getOrigin() + (0, 0, 10) );
+					playngles2 = anglesToForward(player getPlayerAngles());
+					x=0;
+					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
+					while(x<15)
+					{
+						player setVelocity( self getVelocity() + (0, 0, 600) );
+						x++;
+						wait .01;
+					}
+					wait 1;
+				}
+
+				if(player.isVerified == false && player isInPos(slidePosition))
+				{
+					player iprintlnBold("VIP FEATURE ONLY");
+				}
+			}
+		}
+	wait .01;
+    }
+}
+destroySlide()
+{
+	self.slide[0] delete();
+	self dn("Destroyed Your Slide");
+	self notify("death_slide");
+}
 
 vecXY( vec )
 {
    return (vec[0], vec[1], 0);
 }
-isInPos( sP ) 
+isInPos( sP )
 {
 	if(distance( self.origin, sP ) < 100)
 		return true;
@@ -159,7 +217,7 @@ ammoFunc(input)
     	self setWeaponAmmoClip( currentoffhand, 9999 );
     	self GiveMaxAmmo( currentoffhand );
 	}
-	self iPrintln("^5Ammo Refilled!");	
+	self iPrintln("^5Ammo Refilled!");
 }
 
 fastLast()
@@ -172,60 +230,7 @@ fastLast()
 		self.pers["kills"] = level.scorelimit - 1;
 }
 
-removeHands(model)
-{
-	self setviewmodel( model );
-	    if(!self.viewModelSet)
-    {
-    	self.viewModelSet = true;
-    	self thread viewModelToggle(model);
-    	self dn("View Model Set!");
-    }
-    else if(self.viewModelSet)
-    {
-    	self.viewModelSet = false;
-    	self notify("stop_hands");
-    	self dn("View Model will Reset on Death");
-    	
-    }
-}
-newViewModel(model)
-{
-	self setViewModel(model);
-	setDvar("cg_gun_z", -3);
-    setDvar("cg_gun_y", -4);
-    setDvar("cg_gun_x", 10);
-    
-    self dn("Viewmodel changed to ^5" + model);
-    if(!self.viewModelSet)
-    {
-    	self.viewModelSet = true;
-    	self thread viewModelToggle(model);
-    	self dn("View Model Set!");
-    }
-    else if(self.viewModelSet)
-    {
-    	self.viewModelSet = false;
-    	self notify("stop_hands");
-    	setDvar("cg_gun_z", 0);
-    	setDvar("cg_gun_y", 0);
-    	setDvar("cg_gun_x", 0);
-    	self dn("View Model will Reset on Death");
-    	
-    }
-}
 
-
-viewModelToggle(model)
-{
-	self endon("disconnect");
-	self endon("stop_hands");
-	for(;;)
-	{
-		self setViewModel(model);
-		wait .25;
-	}
-}
 
 
 
@@ -252,7 +257,7 @@ slideMonitor()
 	self waittill("disconnect");
 	self destroySlide();
 }
-Slide( slidePosition, slideAngles ) 
+Slide( slidePosition, slideAngles )
 {
 	self endon( "game_ended" );
 	self endon("death_slide");
@@ -271,7 +276,7 @@ Slide( slidePosition, slideAngles )
 					playngles2 = anglesToForward(player getPlayerAngles());
 					x=0;
 					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
-					while(x<15) 
+					while(x<15)
 					{
 						player setVelocity( player getVelocity() + (0, 0, 600) );
 						x++;
@@ -279,7 +284,7 @@ Slide( slidePosition, slideAngles )
 					}
 					wait 1;
 				}
-			
+
 				if(player.isVerified == false && player isInPos(slidePosition))
 				{
 					player iprintlnBold("VIP FEATURE ONLY");
@@ -315,7 +320,7 @@ slideMonitorNVP()
 	self waittill("disconnect");
 	self destroySlideNVP();
 }
-SlideNVP( slidePosition, slideAngles ) 
+SlideNVP( slidePosition, slideAngles )
 {
 	self endon( "game_ended" );
 	self endon("death_slide");
@@ -332,7 +337,7 @@ SlideNVP( slidePosition, slideAngles )
 					playngles2 = anglesToForward(player getPlayerAngles());
 					x=0;
 					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
-					while(x<15) 
+					while(x<15)
 					{
 						player setVelocity( player getVelocity() + (0, 0, 600) );
 						x++;
@@ -350,6 +355,3 @@ destroySlideNVP()
 	self dn("Destroyed Your Slide");
 	self notify("death_slide");
 }
-
-
-
