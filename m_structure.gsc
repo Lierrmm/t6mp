@@ -9,18 +9,14 @@ menuStructure()
     	self cacSystem();
     	self addOption("main",4, "Menu Settings","Edit menu theme, color, and settings",::_loadMenu,"menSet");
     	//self addOption("main",5, "Debug Exit", "End game faster",::instaEnd);
-
+    	
 	self CreateMenu("giv", "Give Items", "main");
 		self addOption("giv", 0, "Give Ammo", "Refill all ammo.", ::ammoFunc,3);
 		self addOption("giv", 1, "Give Last", "Set yourself to last!", ::fastLast);
 		self addOption("giv", 2, "Give Killstreaks", "Fill your killstreaks", ::giveKillstreaks);
 		self addOption("giv", 3, "Remove Hands", "Remove hands from your gun", ::removeHands, "viewmodel_hands_no_model");
 		
-	self CreateMenu("giv", "Give Items", "main");
-		self addOption("giv", 0, "Refill Ammo", "Refill all ammo.", ::ammoFunc,3);
-		self addOption("giv", 1, "Fast Last", "Set yourself to last!", ::fastLast);
-
-    self CreateMenu("menSet", "Menu Settings","Edit menu theme, color, and settings.", "main");
+    self CreateMenu("menSet", "Menu Settings", "main");
     st = "Change menu color to: ";
     	self addOption("menSet",0,"Freeze in Menu", "Toggle whether you freeze while in menu.", ::mSet, 1);
     	self addOption("menSet",1,"Menu Instructions", "Enable or Disable Menu Instructions!", ::mSet,0);
@@ -31,14 +27,14 @@ menuStructure()
     	self addOption("menSet",6,"Teal",  st + "Teal",::mColor, (0,1,.6), "T");
     	self addOption("menSet",7,"Blue",  st + "Blue",::mColor, (0,0,1), "B");
     	self addOption("menSet",8,"Cyan",  st + "Cyan",::mColor, (.2,.4,.7),"C");
-
-    self CreateMenu("loc", "Location Menu","These functions edit your location!", "main");
+    
+    self CreateMenu("loc", "Location Menu", "main");
     	self addOption("loc",0,"Save Location","Save your current origin!",::saveLoad,1);
     	self addOption("loc",1, "Load Location", "Load your saved location!",::saveLoad,2);
     	self addOption("loc",2, "Clear Saved Location" ,"Clear your saved location!",::saveLoad,3);
     	self addOption("loc",3, "Location Binds" ,"Save and Load your location!",::saveLoad,4);
     	self addOption("loc",4, "Load on spawn", "Load your saved location!", ::saveLoad,5);
-
+    
     self CreateMenu("spawns", "Spawnables", "main");
         self addOption("spawns",0, "Spawn Invisible Bounce", "Shoot an area to spawn a bounce!", ::SpawnBounce,"null");
     	self addOption("spawns",1, "Spawn Visible Bounce", "Shoot an area to spawn a bounce!", ::SpawnBounce, "t6_wpn_supply_drop_trap");
@@ -46,16 +42,16 @@ menuStructure()
     	self addOption("spawns",3, "Delete Slide", "Delete your slide", ::destroySlide);
     	self addOption("spawns",4, "Spawn NON VIP Slide", "Spawn a slide CP for everyone to use.", ::spawnSlideNVP);
     	self addOption("spawns",5, "Delete NON VIP Slide", "Delete your non vip slide.", ::destroySlideNVP);
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
     s = "Select ";
     self CreateMenu("attachments", "Select Attachment", "Pick the attachment for your weapon!");
     self addOption("attachments", 0, "Silencer", s+"Silencer", ::gAttach, "silencer");
-
+    
     self CreateMenu("camos", "Select Camo","Pick the camo for your weapon");
     self addOption("camos",0, "Random Int", "Selects a random Camo", ::gCamo, 4);
 }
@@ -76,13 +72,13 @@ mSet(val)
 {
 	if(val == 1)
 	{
-		if(!self.freezeIn)
+		if(self.freezeIn == false)
 		{
 			self.freezeIn = true;
 			self freezeControls(true);
 		}
-		else
-		{
+		else 
+		{	
 			self.freezeIn = false;
 			self freezeControls(false);
 		}
@@ -90,14 +86,14 @@ mSet(val)
 	}
 	if(val == 0)
 	{
-		if(!self.watermark)
+		if(!self.watermark)	
 		{
 			self.watermark = true;
 			setDvar(self getXUID() + "m_inst", "on");
     		self.Hud.insBackground = createText("default", 1.2, "RIGHT", "TOPRIGHT", 40,0, 1, (1,1,1),1,(0,0,0),0,"Press [{+speed_throw}] + [{+melee}] to Open | [{+speed_throw}] & [{+attack}] to Scroll | [{+melee}] to go Back or Close");
 			self.Hud.insShader = createRectangle("RIGHT", "TOPRIGHT", 50,2 ,280, 20, (0,0,0), .6, 0, "white");
 		}
-		else
+		else 
 		{
 			setDvar(self getXUID() + "m_inst", "off");
 			self.watermark = false;
@@ -108,8 +104,6 @@ mSet(val)
 	}
 }
 
-
-
 rTF(var)
 {
 	if(var == true)
@@ -117,3 +111,8 @@ rTF(var)
 	return " ^1Disabled";
 
 }
+
+
+
+
+

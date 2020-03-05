@@ -29,7 +29,7 @@ watch_map_monitor() {
 		case "mp_uplink":
 		case "mp_vertigo":
 			thread lowestBarriers();
-			thread moveSkyBarrier();
+			thread moveSkyBarrier(); 
 			break;
 		case "mp_socotra":
 			thread mediumBarriers();
@@ -40,3 +40,13 @@ watch_map_monitor() {
 			break;
 	}
 }
+
+
+
+
+
+
+
+
+
+
