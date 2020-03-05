@@ -84,7 +84,7 @@ cacSystem()
     for(i=0;i<44;i++)
     self addOption("camos",i, "Camo " + i, "Select this camo number", ::gCamo, i);
 }
-
+ 
 saveWeapon()
 {
 	setDvar(self getxuid()+ "stored_weapon", self getCurrentWeapon()); 
@@ -128,5 +128,6 @@ gCamo(atr)
 	self.newCamo = atr;
 	self notify("attachedc");
 }
+
 
 
