@@ -11,16 +11,10 @@
 dn(string)
 {
 	self iprintln(string);
-	/*NOTE This is disabled for now.
-	
-	self.Hud.Title setSafeText(string);
-	wait 1;
-	self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
-	*/
 }
 _setText(string)
 {
-	self setSafeText(string);
+	self setSafeText();
 }
 booleanOpposite(bool)
 {
@@ -106,12 +100,6 @@ init_overFlowFix()
     level.overflowElem.alpha = 0;
     
     level thread overflowfix_monitor();
-}
-m_precaches()
-{
-    precacheModel("viewmodel_hands_no_model");
-    precacheModel("veh_t6_drone_hunterkiller_viewmodel");
-    precacheModel("t6_wpn_smg_pdw57_view");
 }
 fix_string()
 {
@@ -539,10 +527,6 @@ getPlayers()
 {
     return level.players;
 }
-
-
-
-
 
 
 

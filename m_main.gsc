@@ -22,10 +22,7 @@ menuButtons()
             self _loadMenu("main");
             self aioscroll();
             if(self.freezeIn == true)
-            {
             	self freezeControls(true);
-            }
-            
             wait .2;
         }
         if(self AdsButtonPressed() && self.Menu.Opened==true)
@@ -89,7 +86,7 @@ _loadMenu(menu)
     self destroyMenuText();
     self.Menu.CurrentMenu = menu;
     self.Scroller = 0;
-    self.Hud.Title setSafeText(self.Menu.title[self.Menu.CurrentMenu]);
+    self.Hud.Title _setText(self.Menu.title[self.Menu.CurrentMenu]);
     self createMenuText();
     self aioscroll();
     self.Hud.Desc _setText(self.Menu.Desc[self.Menu.CurrentMenu][self.Scroller]);
@@ -100,7 +97,6 @@ createMenuText()
     {
         self.Hud.Text[i] = createText("default",1.5,"CENTER","TOP",0,175+(18*i),0,(1,1,1),1,(0,0,0),0,self.Menu.Text[self.Menu.CurrentMenu][i]);
         self.Hud.Text[i].foreground = true;
-        self.Hud.Text[i].archived = false;
         self addGlowText(i);
     }
 }
@@ -173,7 +169,7 @@ mColor(name, value)
     self aioscroll();
 }
 
-CreateMenu(menu,title,parent)
+CreateMenu(menu,title,description,parent)
 {
     self.Menu.title[menu] = title;
     self.Menu.parent[menu] = parent;
@@ -210,10 +206,6 @@ Test()
 {
     self iprintln("^1TEST");
 }
-
-
-
-
 
 
 

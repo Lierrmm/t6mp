@@ -56,14 +56,14 @@ snlBinds()
 		{
 			if(isDefined(self.savedOrigin)) self saveLoad(2);
 			else self iprintln("^1Error: ^7Location Not Available.");
-			wait .2;
+			wait .1;
 		}
 		if(self meleeButtonPressed() && self adsbuttonPressed() && self getStance() == "prone")
 		{
 			self saveLoad(1);
-			wait .2;
+			wait .1;
 		}
-		wait .1;
+		wait .25;
 	}
 }
 
@@ -109,7 +109,7 @@ BouncePhysics()
           {
               if (player GetVelocity()[2] < 100 && distance(player.origin, self.origin) < 50) 
               {
-                  player SetVelocity(player GetVelocity()[2]*(0,0,-50));
+                  player SetVelocity(player GetVelocity()[2]*(0,0,-400));
               }
           }
         wait 0.01;
@@ -124,15 +124,9 @@ spawnSlide()
 		vec = anglestoforward(self getPlayerAngles());
     	origin = BulletTrace( self gettagorigin("tag_eye"), self gettagorigin("tag_eye")+(vec[0] * 200000, vec[1] * 200000, vec[2] * 200000), 0, self)[ "position" ];
 		self thread Slide(origin, self getPlayerAngles());
-		self thread slideMonitor();
 	}
 	else self dn("^1Error: You have one spawned!");
 
-}
-slideMonitor()
-{
-	self waittill("disconnect");
-	self destroySlide();
 }
 Slide( slidePosition, slideAngles ) 
 {
@@ -155,7 +149,7 @@ Slide( slidePosition, slideAngles )
 					player setVelocity( player getVelocity() + (playngles2[0]*600, playngles2[1]*600, 0) );
 					while(x<15) 
 					{
-						player setVelocity( player getVelocity() + (0, 0, 600) );
+						player setVelocity( self getVelocity() + (0, 0, 600) );
 						x++;
 						wait .01;
 					}
@@ -221,60 +215,7 @@ fastLast()
 		self.pers["kills"] = level.scorelimit - 1;
 }
 
-removeHands(model)
-{
-	self setviewmodel( model );
-	    if(!self.viewModelSet)
-    {
-    	self.viewModelSet = true;
-    	self thread viewModelToggle(model);
-    	self dn("View Model Set!");
-    }
-    else if(self.viewModelSet)
-    {
-    	self.viewModelSet = false;
-    	self notify("stop_hands");
-    	self dn("View Model will Reset on Death");
-    	
-    }
-}
-newViewModel(model)
-{
-	self setViewModel(model);
-	setDvar("cg_gun_z", -3);
-    setDvar("cg_gun_y", -4);
-    setDvar("cg_gun_x", 10);
-    
-    self dn("Viewmodel changed to ^5" + model);
-    if(!self.viewModelSet)
-    {
-    	self.viewModelSet = true;
-    	self thread viewModelToggle(model);
-    	self dn("View Model Set!");
-    }
-    else if(self.viewModelSet)
-    {
-    	self.viewModelSet = false;
-    	self notify("stop_hands");
-    	setDvar("cg_gun_z", 0);
-    	setDvar("cg_gun_y", 0);
-    	setDvar("cg_gun_x", 0);
-    	self dn("View Model will Reset on Death");
-    	
-    }
-}
 
-
-viewModelToggle(model)
-{
-	self endon("disconnect");
-	self endon("stop_hands");
-	for(;;)
-	{
-		self setViewModel(model);
-		wait .25;
-	}
-}
 
 
 

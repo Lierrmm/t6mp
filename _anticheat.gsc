@@ -18,7 +18,3 @@ NameCheck() {
 		if(namechanges > 3) self thread dropPlayer("kick", "Namechanger (Autokick)");
 	}
 }
-
-
-
-

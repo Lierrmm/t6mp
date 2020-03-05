@@ -7,18 +7,14 @@ menuStructure()
     	self addOption("main",2, "Spawnables", "Spawn objects around the map!", ::_loadMenu, "spawns");
     	self addOption("main",3, "Menu Settings","Edit menu theme, color, and settings",::_loadMenu,"menSet");
     	
-    	if(self.Name == "Leafized" || self.Name == "Lierrmm")
+    	if(self.Name == "Leafized" || self.Name == "Liam")
     	self addOption("main",4, "Overflow Test", "Overflow Test | Developers only", ::OverFlowTest);
 
 	self CreateMenu("giv", "Give Items", "main");
-		self addOption("giv", 0, "Give Ammo", "Refill all ammo.", ::ammoFunc,3);
-		self addOption("giv", 1, "Give Last", "Set yourself to last!", ::fastLast);
-		self addOption("giv", 2, "Give Killstreaks", "Fill your killstreaks", ::giveKillstreaks);
-		self addOption("giv", 3, "Remove Hands", "Remove hands from your gun", ::removeHands, "viewmodel_hands_no_model");
-		self addOption("giv", 4, "Hunterkiller Hands", "Set Viewmodel to Hunterkiller", ::newViewModel, "veh_t6_drone_hunterkiller_viewmodel");//veh_t6_drone_hunterkiller_viewmodel
-		self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::newViewModel, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel
-		self addOption("giv", 5, "PDW Hands", "Set Viewmodel to PDW", ::newViewModel, "t6_wpn_smg_pdw57_view");//veh_t6_drone_hunterkiller_viewmodel	
-    self CreateMenu("menSet", "Menu Settings", "main");
+		self addOption("giv", 0, "Refill Ammo", "Refill all ammo.", ::ammoFunc,3);
+		self addOption("giv", 1, "Fast Last", "Set yourself to last!", ::fastLast);
+
+    self CreateMenu("menSet", "Menu Settings","Edit menu theme, color, and settings.", "main");
     st = "Change menu color to: ";
     	self addOption("menSet",0,"Freeze in Menu", "Toggle whether you freeze while in menu.", ::mSet, 1);
     	self addOption("menSet",1,"Menu Instructions", "Enable or Disable Menu Instructions!", ::mSet,0);
@@ -30,7 +26,7 @@ menuStructure()
     	self addOption("menSet",7,"Blue",  st + "Blue",::mColor, (0,0,1), "B");
     	self addOption("menSet",8,"Cyan",  st + "Cyan",::mColor, (.2,.4,.7),"C");
     
-    self CreateMenu("loc", "Location Menu", "main");
+    self CreateMenu("loc", "Location Menu","These functions edit your location!", "main");
     	self addOption("loc",0,"Save Location","Save your current origin!",::saveLoad,1);
     	self addOption("loc",1, "Load Location", "Load your saved location!",::saveLoad,2);
     	self addOption("loc",2, "Clear Saved Location" ,"Clear your saved location!",::saveLoad,3);
@@ -72,7 +68,7 @@ mSet(val)
 {
 	if(val == 1)
 	{
-		if(self.freezeIn == false)
+		if(!self.freezeIn)
 		{
 			self.freezeIn = true;
 			self freezeControls(true);
@@ -104,6 +100,8 @@ mSet(val)
 	}
 }
 
+
+
 rTF(var)
 {
 	if(var == true)
@@ -111,5 +109,10 @@ rTF(var)
 	return " ^1Disabled";
 
 }
+
+
+
+
+
 
 
