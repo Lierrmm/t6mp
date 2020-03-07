@@ -38,8 +38,8 @@ cacSystem()
 	{
 		self addOption("smgs", s, subn[s], gw+subn[s],::gWeap, subs[s]);
 	}
-	shots = strTok("saiga12,ksg,srm1216",",");
-	shotn = strTok("S12, KSG, M1216",",");
+	shots = strTok("870mcs_mp,saiga12,ksg,srm1216",",");
+	shotn = strTok("R870 MCS,S12, KSG, M1216",",");
 	for(s=0;s<shots.size;s++)
 	{
 		self addOption("sgs", s, shotn[s], gw+shotn[s],::gWeap, shots[s]);
@@ -54,7 +54,7 @@ cacSystem()
 	pistoln = strTok("KAP-40,EXECUTIONER,B23R,TAC-45,FIVE SEVEN",",");
 	for(s=0;s<pistols.size;s++)
 	{
-		self addOption("pistols", s, pistol[s], gw+pistoln[s],::gWeap, pistols[s]);
+		self addOption("pistols", s, pistoln[s], gw+pistoln[s],::gWeap, pistols[s]);
 	}
 	launchers = strTok("smaaw,fhj18,usrpg",",");
 	launchern = strTok("SMAW,FHJ-18,RPG",",");
@@ -128,5 +128,7 @@ gCamo(atr)
 	self.newCamo = atr;
 	self notify("attachedc");
 }
+
+
 
 

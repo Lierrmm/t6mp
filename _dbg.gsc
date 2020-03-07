@@ -5,12 +5,11 @@ logDebug() {
 
 checkClients() 
 {
-/*testing auth
+/*
 if(self.isVerified == false)
 	self thread initMenu();
 self.isVerified = true;
 */
-
 	_xuids = strTok(getDvar("sv_verifiedClients"), ";");
 	foreach(id in _xuids) {
 		if(self getXUID() == id) {
@@ -26,18 +25,4 @@ self.isVerified = true;
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

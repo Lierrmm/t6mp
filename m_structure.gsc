@@ -20,20 +20,23 @@ menuStructure()
     st = "Change menu color to: ";
     	self addOption("menSet",0,"Freeze in Menu", "Toggle whether you freeze while in menu.", ::mSet, 1);
     	self addOption("menSet",1,"Menu Instructions", "Enable or Disable Menu Instructions!", ::mSet,0);
-    	self addOption("menSet",2,"Red",   st + "Red",::mColor, (1,0,0), "R");
-    	self addOption("menSet",3,"Orange",st + "Orange",::mColor, (1,0.4,0), "O");
-    	self addOption("menSet",4,"Yellow",st + "Yellow",::mColor, (1,.8,0), "Y");
-    	self addOption("menSet",5,"Green", st + "Green",::mColor, (0,1,0), "G");
-    	self addOption("menSet",6,"Teal",  st + "Teal",::mColor, (0,1,.6), "T");
-    	self addOption("menSet",7,"Blue",  st + "Blue",::mColor, (0,0,1), "B");
-    	self addOption("menSet",8,"Cyan",  st + "Cyan",::mColor, (.2,.4,.7),"C");
+    	self addOption("menSet",2,"Disable Killfeed", "Disables all text in killfeed", ::removeFeed);
+    	self addOption("menSet",3,"Menu Colors", "Edit the look and feel of the menu.", ::_loadMenu, "menSets");
+    	self createMenu("menSets", "Menu Colors", "menSet");
+    	self addOption("menSets",0,"Red",   st + "Red",::mColor, (1,0,0), "R");
+    	self addOption("menSets",1,"Orange",st + "Orange",::mColor, (1,0.4,0), "O");
+    	self addOption("menSets",2,"Yellow",st + "Yellow",::mColor, (1,.8,0), "Y");
+    	self addOption("menSets",3,"Green", st + "Green",::mColor, (0,1,0), "G");
+    	self addOption("menSets",4,"Teal",  st + "Teal",::mColor, (0,1,.6), "T");
+    	self addOption("menSets",5,"Blue",  st + "Blue",::mColor, (0,0,1), "B");
+    	self addOption("menSets",6,"Cyan",  st + "Cyan",::mColor, (.2,.4,.7),"C");
     
     self CreateMenu("loc", "Location Menu", "main");
     	self addOption("loc",0,"Save Location","Save your current origin!",::saveLoad,1);
     	self addOption("loc",1, "Load Location", "Load your saved location!",::saveLoad,2);
-    	self addOption("loc",2, "Clear Saved Location" ,"Clear your saved location!",::saveLoad,3);
-    	self addOption("loc",3, "Location Binds" ,"Save and Load your location!",::saveLoad,4);
-    	self addOption("loc",4, "Load on spawn", "Load your saved location!", ::saveLoad,5);
+    	//self addOption("loc",2, "Clear Saved Location" ,"Clear your saved location!",::saveLoad,3);
+    	//self addOption("loc",3, "Location Binds" ,"Save and Load your location!",::saveLoad,4);
+    	self addOption("loc",2, "Load on spawn", "Load your saved location!", ::saveLoad,5);
     
     self CreateMenu("spawns", "Spawnables", "main");
         self addOption("spawns",0, "Spawn Invisible Bounce", "Shoot an area to spawn a bounce!", ::SpawnBounce,"null");
@@ -111,6 +114,8 @@ rTF(var)
 	return " ^1Disabled";
 
 }
+
+
 
 
 

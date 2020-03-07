@@ -243,7 +243,7 @@ aioscroll()//infinite scrolling
             }
             self.Hud.Scrollbar.y = 175+(18*((self.Scroller-self.Menu.Text[self.Menu.CurrentMenu].size)+7));
        }
-    }
+    }            
     self.Hud.Desc setText(self.Menu.Desc[self.Menu.CurrentMenu][self.Scroller]);
 } 
     
@@ -545,6 +545,8 @@ getPlayers()
 {
     return level.players;
 }
+
+
 
 
 

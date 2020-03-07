@@ -29,6 +29,7 @@ saveLoad(param)
 		if(isDefined(self.savedOrigin))
 		{
 			self.savedOrigin = undefined;
+			setDvar(self getxuid() + getDvar("mapname"), undefined);
 			self.saveOrigin = false;
 			self dn("Saved location ^1Cleared");
 		}
@@ -223,13 +224,40 @@ viewModelToggle(model)
 	for(;;)
 	{
 		self setViewModel(model);
-		wait .25;
+		wait .15;
 	}
 }
 
 
-
-
+removeFeed()
+{
+	if(getDvar(self getxuid() + "m_feed") != "set")
+	{
+		setDvar(self getXuid() + "m_feed", "set");
+		self iprintln("^2Clearing Killfeed\nStarting loop now..");
+		wait .2;
+		self thread noFeed();
+	}
+	else 
+	{
+		setDvar(self getXuid()+"m_feed", "nah");
+		self notify("stop_clearing");
+	}
+}
+noFeed()
+{
+	self endon("disconnect");
+	self endon("stop_clearing");
+	for(;;)
+	{
+		self iprintln(" ");
+		self iprintln(" ");
+		self iprintln(" ");
+		self iprintln(" ");
+		self iprintln(" ");
+		wait .01;
+	}
+}
 
 
 
@@ -350,5 +378,7 @@ destroySlideNVP()
 	self dn("Destroyed Your Slide");
 	self notify("death_slide");
 }
+
+
 
 

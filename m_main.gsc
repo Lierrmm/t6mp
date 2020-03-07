@@ -30,12 +30,14 @@ menuButtons()
         }
         if(self AdsButtonPressed() && self.Menu.Opened==true)
         {
+        	self.oldScroll = self.Scroller;
             self.Scroller --;
             self scrollAnim();
             self aioscroll();
         }
         if(self attackButtonPressed() && self.Menu.Opened==true)
         {
+        	self.oldScroll = self.Scroller;
             self.Scroller ++;
             self scrollAnim();
             self aioscroll();
@@ -80,9 +82,12 @@ menuButtons()
 }
 scrollAnim()
 {
+
             self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,16);
+
             wait .11;                                             
             self.Hud.Scrollbar elemManage(.1,undefined,undefined,1,200,20);
+
 }
 
 _loadMenu(menu)
@@ -210,6 +215,8 @@ Test()
 {
     self iprintln("^1TEST");
 }
+
+
 
 
 
